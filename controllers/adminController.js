@@ -10,6 +10,8 @@ module.exports = {
         }
     },
     // akhir dashboard
+
+    // pegawai
     viewPegawai: async (req, res) => {
         try {
             res.render("admin/pegawai/view_pegawai", {
@@ -19,6 +21,16 @@ module.exports = {
             console.log(error)
         }
     },
+    addPegawai: async (req, res) => {
+        try {
+            const { name, unker, nik, npwp, no_rek_jateng, no_rek_bni, no_bpjs_kes, no_bpjs_ket } = req.body;
+             
+        } catch (error) {
+            
+        }
+    },
+    // akhir pegawai
+
     viewSk: async (req, res) => {
         try {
             res.render("admin/sk/view_sk", {
