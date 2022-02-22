@@ -5,6 +5,7 @@ const adminController = require('../controllers/adminController');
 router.get('/dashboard', adminController.viewDashboard);
 // route pegawai
 router.get('/pegawai', adminController.viewPegawai);
+router.post('/pegawai', adminController.addPegawai);
 // route sk
 router.get('/sk', adminController.viewSk);
 // route gaji

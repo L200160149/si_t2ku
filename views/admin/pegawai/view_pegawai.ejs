@@ -21,48 +21,13 @@
     </div>
     <!-- /.content-header -->
 
-    <!-- Main content -->
-    <div class="content">
-      <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card card-primary card-outline">
-                  <div class="card-header">
-                      <button class="btn btn-primary"><i class="nav-icon fas fa-plus"></i> Tambah</button>
-                  </div>
-                  <div class="card-body">
-                      <table id="example2" class="table table-bordered table-striped">
-                          <thead>
-                          <tr>
-                            <th>No.</th>
-                            <th>Nama</th>
-                            <th>Unker</th>
-                            <th>Aksi</th>
-                          </tr>
-                          </thead>
-                          <tbody>
-                          <tr>
-                            <td>1</td>
-                            <td>Balai Semarang</td>
-                            <td>Balai Semarang</td>
-                            <td>
-                              <button class="btn btn-info"><i class="nav-icon fas fa-pencil-alt"></i> </button>
-                              <button class="btn btn-secondary"><i class="nav-icon fas fa-eye"></i> </button>
-                              <button class="btn btn-danger"><i class="nav-icon fas fa-trash"></i> </button>
-                            </td>
-                          </tr>
-                          </tbody>
-                      </table>
-                  </div>
-                </div>
-            </div>
-          </div>
-        <!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content -->
+    <%- include('table_pegawai.ejs') %> 
+    
   </div>
   <!-- /.content-wrapper -->
+  
+  <!-- Modal -->
+  <%- include('add_modal.ejs') %>
 
   <%- include('../../partials/footer.ejs') %> 
   <%- include('../../partials/js.ejs') %> 

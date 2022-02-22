@@ -33,7 +33,26 @@ const pegawaiSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-
+    foto_npwp: {
+        type: String,
+        required: true
+    },
+    foto_rek_jateng: {
+        type: String,
+        required: true
+    },
+    foto_rek_bni: {
+        type: String,
+        required: true
+    },
+    foto_bpjs_kes: {
+        type: String,
+        required: true
+    },
+    foto_bpjs_ket: {
+        type: String,
+        required: true
+    },
 })
 
 module.exports = mongoose.model('Pegawai', pegawaiSchema)

@@ -1,0 +1,84 @@
+<!-- Modal -->
+<div class="modal fade" id="add_modal" tabindex="-1" role="dialog" aria-labelledby="add_modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="add_modal">Tambah Data Pegawai</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="nama">Nama <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" name="nama" id="nama" placeholder="Masukkan Nama Pegawai ...">
+            </div>
+            <div class="form-group">
+                <label for="unker">Unit Kerja <span class="text-danger">*</span></label>
+                <select name="unker" id="unker" class="form-control" required>
+                    <option value="">-- Pilih Unit Kerja --</option>
+                    <option value="DPU Bina Marga & Cipta Karya Provinsi Jawa Tengah">DPU Bina Marga & Cipta Karya Provinsi Jawa Tengah</option>
+                    <option value="BP2">BP2</option>
+                    <option value="Balai Jakon">Balai Jakon</option>
+                    <option value="BPJ Cilacap">BPJ Cilacap</option>
+                    <option value="BPJ Magelang">BPJ Magelang</option>
+                    <option value="BPJ Pati">BPJ Pati</option>
+                    <option value="BPJ Pekalongan">BPJ Pekalongan</option>
+                    <option value="BPJ Purwodadi">BPJ Purwodadi</option>
+                    <option value="BPJ Semarang">BPJ Semarang</option>
+                    <option value="BPJ Surakarta">BPJ Surakarta</option>
+                    <option value="BPJ Tegal">BPJ Tegal</option>
+                    <option value="BPJ Wonosobo">BPJ Wonosobo</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="nik">NIK <span class="text-danger">*</span></label>
+                <input type="number" class="form-control" name="nik" id="nik" placeholder="Masukkan NIK Pegawai ...">
+            </div>
+            <div class="form-group">
+                <label for="npwp">NPWP <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" name="npwp" id="npwp" placeholder="Masukkan NPWP ...">
+            </div>
+            <div class="form-group">
+                <label for="no_rek_jateng">Nomor Rekening Bank Jateng <span class="text-danger">*</span></label>
+                <input type="number" class="form-control" name="no_rek_jateng" id="no_rek_jateng" placeholder="Masukkan Nomor Rekening Bank Jateng ...">
+            </div>
+            <div class="form-group">
+                <label for="no_rek_bni">Nomor Rekening Bank BNI <span class="text-danger">*</span></label>
+                <input type="number" class="form-control" name="no_rek_bni" id="no_rek_bni" placeholder="Masukkan Nomor Rekening Bank BNI ...">
+            </div>
+            <div class="form-group">
+                <label for="no_bpjs_kes">Nomor BPJS Kesehatan <span class="text-danger">*</span></label>
+                <input type="number" class="form-control" name="no_bpjs_kes" id="no_bpjs_kes" placeholder="Masukkan Nomor BPJS Kesehatan ...">
+            </div>
+            <div class="form-group">
+                <label for="no_bpjs_ket">Nomor BPJS Ketenagakerjaan <span class="text-danger">*</span></label>
+                <input type="number" class="form-control" name="no_bpjs_ket" id="no_bpjs_ket" placeholder="Masukkan Nomor BPJS Ketenagakerjaan ...">
+            </div>
+            <div class="form-group">
+                <label for="foto_npwp">Foto NPWP <span class="text-danger">*</span></label>
+                <input type="file" class="form-control" name="foto_npwp" id="foto_npwp">
+            </div>
+            <div class="form-group">
+                <label for="foto_rek_jateng">Foto Rekening Bank Jateng <span class="text-danger">*</span></label>
+                <input type="file" class="form-control" name="foto_rek_jateng" id="foto_rek_jateng">
+            </div>
+            <div class="form-group">
+                <label for="foto_rek_bni">Foto Rekening Bank BNI <span class="text-danger">*</span></label>
+                <input type="file" class="form-control" name="foto_rek_bni" id="foto_rek_bni">
+            </div>
+            <div class="form-group">
+                <label for="foto_bpjs_kes">Foto BPJS Kesehatan <span class="text-danger">*</span></label>
+                <input type="file" class="form-control" name="foto_bpjs_kes" id="foto_bpjs_kes">
+            </div>
+            <div class="form-group">
+                <label for="foto_bpjs_ket">Foto BPJS Ketenagakerjaan <span class="text-danger">*</span></label>
+                <input type="file" class="form-control" name="foto_bpjs_ket" id="foto_bpjs_ket">
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary">Tambah</button>
+        </div>
+      </div>
+    </div>
+  </div>

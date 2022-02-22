@@ -1,3 +1,5 @@
+const Pegawai = require("../models/Pegawai")
+
 module.exports = {
     // dashboard
     viewDashboard: async (req, res) => {
@@ -5,6 +7,7 @@ module.exports = {
             res.render("admin/dashboard/view_dashboard", {
                 title: 'Dashboard | T2KU BMCK Jateng'
             })
+            console.log(Pegawai)
         } catch (error) {
             console.log(error)
         }
@@ -24,9 +27,14 @@ module.exports = {
     addPegawai: async (req, res) => {
         try {
             const { name, unker, nik, npwp, no_rek_jateng, no_rek_bni, no_bpjs_kes, no_bpjs_ket } = req.body;
-             
+            await Pegawai.create({ name, unker, nik, npwp, no_rek_jateng, no_rek_bni, no_bpjs_kes, no_bpjs_ket });
+            req.flash('alertMessage', 'Berhasil menambahkan data Pegawai');
+            req.flash('alertStatus', 'success');
+            res.redirect("/admin/category");
         } catch (error) {
-            
+            req.flash('alertMessage', `${error.message}`);
+            req.flash('alertStatus', 'danger');
+            res.redirect("/admin/category");
         }
     },
     // akhir pegawai
