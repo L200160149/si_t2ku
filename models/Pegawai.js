@@ -57,6 +57,10 @@ const pegawaiSchema = new mongoose.Schema({
     //     type: String,
     //     required: true
     // },
+    file_SK: {
+        type: String,
+        required: true
+    },
 })
 
 module.exports = mongoose.model('Pegawai', pegawaiSchema)

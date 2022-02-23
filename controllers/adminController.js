@@ -38,7 +38,17 @@ module.exports = {
     addPegawai: async (req, res) => {
         try {
             const { nama, unker, nik, npwp, no_rek_jateng, no_rek_bni, no_bpjs_kes, no_bpjs_ket } = req.body;
-            await Pegawai.create({ nama, unker, nik, npwp, no_rek_jateng, no_rek_bni, no_bpjs_kes, no_bpjs_ket });
+            await Pegawai.create({ 
+                nama,
+                unker, 
+                nik, 
+                npwp, 
+                no_rek_jateng, 
+                no_rek_bni, 
+                no_bpjs_kes, 
+                no_bpjs_ket,
+                file_SK: `uploads/SK/${req.file.filename}` 
+            });
             req.flash('alertMessage', 'Berhasil menambahkan data Pegawai');
             req.flash('alertStatus', 'success');
             res.redirect("/admin/pegawai");
@@ -87,27 +97,6 @@ module.exports = {
     },
     // akhir pegawai
 
-    viewSk: async (req, res) => {
-        try {
-            const pegawai = await Pegawai.find();
-            // const sk = await SK.find();
-
-            // alert
-            const alertMessage = req.flash('alertMessage');
-            const alertStatus = req.flash('alertStatus');
-            const alert = { 
-                message: alertMessage, 
-                status: alertStatus,
-            };
-            res.render("admin/sk/view_sk", {
-                title: 'Data SK | T2KU BMCK Jateng',
-                pegawai,
-                alert
-            })
-        } catch (error) {
-            console.log(error)
-        }
-    },
     viewGaji: async (req, res) => {
         try {
             res.render("admin/gaji/view_gaji", {
