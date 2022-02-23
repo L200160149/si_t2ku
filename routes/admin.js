@@ -6,6 +6,8 @@ router.get('/dashboard', adminController.viewDashboard);
 // route pegawai
 router.get('/pegawai', adminController.viewPegawai);
 router.post('/pegawai', adminController.addPegawai);
+router.put('/pegawai', adminController.editPegawai);
+router.delete('/pegawai/:id', adminController.deletePegawai);
 // route sk
 router.get('/sk', adminController.viewSk);
 // route gaji

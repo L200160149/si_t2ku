@@ -17,8 +17,19 @@ module.exports = {
     // pegawai
     viewPegawai: async (req, res) => {
         try {
+            const pegawai = await Pegawai.find();
+            // alert
+            const alertMessage = req.flash('alertMessage');
+            const alertStatus = req.flash('alertStatus');
+            const alert = { 
+                message: alertMessage, 
+                status: alertStatus,
+            };
+
             res.render("admin/pegawai/view_pegawai", {
-                title: 'Data Pegawai | T2KU BMCK Jateng'
+                title: 'Data Pegawai | T2KU BMCK Jateng',
+                alert,
+                pegawai
             })
         } catch (error) {
             console.log(error)
@@ -26,23 +37,72 @@ module.exports = {
     },
     addPegawai: async (req, res) => {
         try {
-            const { name, unker, nik, npwp, no_rek_jateng, no_rek_bni, no_bpjs_kes, no_bpjs_ket } = req.body;
-            await Pegawai.create({ name, unker, nik, npwp, no_rek_jateng, no_rek_bni, no_bpjs_kes, no_bpjs_ket });
+            const { nama, unker, nik, npwp, no_rek_jateng, no_rek_bni, no_bpjs_kes, no_bpjs_ket } = req.body;
+            await Pegawai.create({ nama, unker, nik, npwp, no_rek_jateng, no_rek_bni, no_bpjs_kes, no_bpjs_ket });
             req.flash('alertMessage', 'Berhasil menambahkan data Pegawai');
             req.flash('alertStatus', 'success');
-            res.redirect("/admin/category");
+            res.redirect("/admin/pegawai");
         } catch (error) {
             req.flash('alertMessage', `${error.message}`);
             req.flash('alertStatus', 'danger');
-            res.redirect("/admin/category");
+            res.redirect("/admin/pegawai");
+        }
+    },
+    editPegawai: async (req, res) => {
+        try {
+            const { id, nama, unker, nik, npwp, no_rek_jateng, no_rek_bni, no_bpjs_kes, no_bpjs_ket} = req.body;
+            const pegawai = await Pegawai.findOne({_id: id});
+            pegawai.nama = nama;
+            pegawai.unker = unker;
+            pegawai.nik = nik;
+            pegawai.npwp = npwp;
+            pegawai.no_rek_jateng = no_rek_jateng;
+            pegawai.no_rek_bni = no_rek_bni;
+            pegawai.no_bpjs_kes = no_bpjs_kes;
+            pegawai.no_bpjs_ket = no_bpjs_ket;
+            await pegawai.save();
+
+            req.flash('alertMessage', 'Berhasil mengubah data Pegawai');
+            req.flash('alertStatus', 'success');
+            res.redirect("/admin/pegawai");
+        } catch (error) {
+            req.flash('alertMessage', `${error.message}`);
+            req.flash('alertStatus', 'danger');
+            res.redirect("/admin/pegawai");
+        }
+    },
+    deletePegawai: async (req, res) => {
+        try {
+            const { id } = req.params;
+            const pegawai = await Pegawai.findOne({_id: id});
+            await pegawai.remove();
+            req.flash('alertMessage', 'Berhasil menghapus data Pegawai');
+            req.flash('alertStatus', 'success');
+            res.redirect("/admin/pegawai");
+        } catch (error) {
+            req.flash('alertMessage', `${error.message}`);
+            req.flash('alertStatus', 'danger');
+            res.redirect("/admin/pegawai");
         }
     },
     // akhir pegawai
 
     viewSk: async (req, res) => {
         try {
+            const pegawai = await Pegawai.find();
+            // const sk = await SK.find();
+
+            // alert
+            const alertMessage = req.flash('alertMessage');
+            const alertStatus = req.flash('alertStatus');
+            const alert = { 
+                message: alertMessage, 
+                status: alertStatus,
+            };
             res.render("admin/sk/view_sk", {
-                title: 'Data SK | T2KU BMCK Jateng'
+                title: 'Data SK | T2KU BMCK Jateng',
+                pegawai,
+                alert
             })
         } catch (error) {
             console.log(error)

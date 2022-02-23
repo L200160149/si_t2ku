@@ -5,10 +5,10 @@
           <div class="col-md-12">
               <div class="card card-primary card-outline">
                 <div class="card-header">
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#add_modal"><i class="nav-icon fas fa-plus"></i> Tambah</button>
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#add-modal"><i class="nav-icon fas fa-plus"></i> Tambah</button>
                 </div>
                 <div class="card-body">
-                    <table id="example2" class="table table-bordered table-striped">
+                    <table class="table table-bordered table-striped" id="dataTable">
                         <thead>
                         <tr>
                           <th>No.</th>
@@ -18,16 +18,105 @@
                         </tr>
                         </thead>
                         <tbody>
+                          <% for (let i = 0; i < pegawai.length; i++) { %> 
                         <tr>
-                          <td>1</td>
-                          <td>Balai Semarang</td>
-                          <td>Balai Semarang</td>
+                          <td><%= i + 1 %></td>
+                          <td><%= pegawai[i].nama %></td>
+                          <td><%= pegawai[i].unker %></td>
                           <td>
-                            <button class="btn btn-info"><i class="nav-icon fas fa-pencil-alt"></i> </button>
-                            <button class="btn btn-secondary"><i class="nav-icon fas fa-eye"></i> </button>
-                            <button class="btn btn-danger"><i class="nav-icon fas fa-trash"></i> </button>
+                              <a href="javascript:void()" type="button" class="btn btn-info button-update"
+                                data-id="<%= pegawai[i].id %>"
+                                data-nama="<%= pegawai[i].nama %>"
+                                data-unker="<%= pegawai[i].unker %>"
+                                data-nik="<%= pegawai[i].nik %>"
+                                data-npwp="<%= pegawai[i].npwp %>"
+                                data-no_rek_jateng="<%= pegawai[i].no_rek_jateng %>"
+                                data-no_rek_bni="<%= pegawai[i].no_rek_bni %>"
+                                data-no_bpjs_kes="<%= pegawai[i].no_bpjs_kes %>"
+                                data-no_bpjs_ket="<%= pegawai[i].no_bpjs_ket %>"
+                              ><i class="nav-icon fas fa-pencil-alt"></i> </a>
+                              <button class="btn btn-secondary" data-toggle="modal" data-target="#detail_modal<%= pegawai[i].id %>"><i class="nav-icon fas fa-eye"></i> </button>
+                              <button class="btn btn-danger" data-toggle="modal" data-target="#delete_modal<%= pegawai[i].id %>"><i class="nav-icon fas fa-trash"></i> </button>
+                            
+                              <!-- Modal Hapus -->
+                              <div class="modal fade" id="delete_modal<%= pegawai[i].id %>" tabindex="-1" role="dialog" aria-labelledby="delete_modalTitle" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="delete_modalTitle">Hapus Data Pegawai ?</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                      Data yang sudah di hapus tidak dapat dikembalikan lagi.
+                                    </div>
+                                    <div class="modal-footer">
+                                    <form action="/admin/pegawai/<%= pegawai[i].id %>?_method=DELETE" method="POST">
+                                      <button type="submit" class="btn btn-danger">Hapus</button>
+                                    </form>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <!-- Modal Detail -->
+                              <div class="modal fade" id="detail_modal<%= pegawai[i].id %>" tabindex="-1" role="dialog" aria-labelledby="delete_modalTitle" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="delete_modalTitle">Detail Data Pegawai</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <table class="table table-striped">
+                                        <tbody>
+                                          <tr>
+                                            <td>1. Nama</td>
+                                            <td>: <%= pegawai[i].nama %> </td>
+                                          </tr>
+                                          <tr>
+                                            <td>2. Unit Kerja</td>
+                                            <td>: <%= pegawai[i].unker %> </td>
+                                          </tr>
+                                          <tr>
+                                            <td>3. NIK</td>
+                                            <td>: <%= pegawai[i].nik %> </td>
+                                          </tr>
+                                          <tr>
+                                            <td>4. NPWP</td>
+                                            <td>: <%= pegawai[i].npwp %> </td>
+                                          </tr>
+                                          <tr>
+                                            <td>5. Nomor Rekening Bank Jateng</td>
+                                            <td>: <%= pegawai[i].no_rek_jateng %> </td>
+                                          </tr>
+                                          <tr>
+                                            <td>6. Nomor Rekening Bank BNI</td>
+                                            <td>: <%= pegawai[i].no_rek_bni %> </td>
+                                          </tr>
+                                          <tr>
+                                            <td>7. Nomor BPJS Kesehatan</td>
+                                            <td>: <%= pegawai[i].no_bpjs_kes %> </td>
+                                          </tr>
+                                          <tr>
+                                            <td>8. Nomor BPJS Ketenagakerjaan</td>
+                                            <td>: <%= pegawai[i].no_bpjs_ket %> </td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary">Tutup</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
                           </td>
                         </tr>
+                        <% } %> 
                         </tbody>
                     </table>
                 </div>

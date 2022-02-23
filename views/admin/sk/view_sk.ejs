@@ -6,10 +6,13 @@
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
+
+        
         <div class="row mb-2">
           <div class="col-sm-6">
             <h1 class="m-0">Data SK</h1>
           </div><!-- /.col -->
+
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <!-- <li class="breadcrumb-item"><a href="#">Home</a></li> -->
@@ -17,51 +20,46 @@
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
+
+        <%- include('../../partials/message.ejs') %> 
+
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
 
-    <!-- Main content -->
-    <div class="content">
-      <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card card-primary card-outline">
-                  <div class="card-header">
-                      <button class="btn btn-primary"><i class="nav-icon fas fa-plus"></i> Tambah</button>
-                  </div>
-                  <div class="card-body">
-                      <table id="example2" class="table table-bordered table-striped">
-                          <thead>
-                          <tr>
-                            <th>No.</th>
-                            <th>Nama</th>
-                            <th>SK</th>
-                            <th>Aksi</th>
-                          </tr>
-                          </thead>
-                          <tbody>
-                          <tr>
-                            <td>1</td>
-                            <td>Balai</td>
-                            <td>Balai</td>
-                            <td>
-                              <button class="btn btn-info"><i class="nav-icon fas fa-pencil-alt"></i> </button>
-                              <button class="btn btn-danger"><i class="nav-icon fas fa-trash"></i> </button>
-                            </td>
-                          </tr>
-                          </tbody>
-                      </table>
-                  </div>
-                </div>
-            </div>
-          </div>
-        <!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content -->
+    <%- include('table_sk.ejs') %> 
+    
   </div>
   <!-- /.content-wrapper -->
+  
+  <!-- Modal -->
+  <%- include('add_modal.ejs') %>
+  <%- include('edit_modal.ejs') %>
 
   <%- include('../../partials/footer.ejs') %> 
   <%- include('../../partials/js.ejs') %> 
+
+  <script>
+    $('#dataTable').on('click', '.button-update', function() {
+      let id = $(this).data('id');
+      let nama = $(this).data('nama');
+      let unker = $(this).data('unker');
+      let nik = $(this).data('nik');
+      let npwp = $(this).data('npwp');
+      let no_rek_jateng = $(this).data('no_rek_jateng');
+      let no_rek_bni = $(this).data('no_rek_bni');
+      let no_bpjs_kes = $(this).data('no_bpjs_kes');
+      let no_bpjs_ket = $(this).data('no_bpjs_ket');
+
+      $('#edit-modal').modal('show');
+      $('.id').val(id);
+      $('.nama').val(nama);
+      $('.unker').val(unker);
+      $('.nik').val(nik);
+      $('.npwp').val(npwp);
+      $('.no_rek_jateng').val(no_rek_jateng);
+      $('.no_rek_bni').val(no_rek_bni);
+      $('.no_bpjs_kes').val(no_bpjs_kes);
+      $('.no_bpjs_ket').val(no_bpjs_ket);
+    })
+  </script>
