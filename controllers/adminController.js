@@ -1,4 +1,6 @@
 const Pegawai = require("../models/Pegawai")
+const fs = require('fs-extra');
+const path = require('path');
 
 module.exports = {
     // dashboard
@@ -37,7 +39,6 @@ module.exports = {
     },
     addPegawai: async (req, res) => {
         try {
-            console.log(req.files.file_SK[0].filename)
             const { nama, unker, nik, npwp, no_rek_jateng, no_rek_bni, no_bpjs_kes, no_bpjs_ket } = req.body;
             await Pegawai.create({ 
                 nama,
@@ -54,7 +55,6 @@ module.exports = {
                 foto_rek_jateng: `uploads/${req.files.foto_rek_jateng[0].filename}`,
                 foto_rek_bni: `uploads/${req.files.foto_rek_bni[0].filename}`,
                 foto_bpjs_kes: `uploads/${req.files.foto_bpjs_kes[0].filename}`,
-                foto_bpjs_kes: `uploads/${req.files.foto_bpjs_kes[0].filename}`,
                 foto_bpjs_ket: `uploads/${req.files.foto_bpjs_ket[0].filename}`,
             });
             req.flash('alertMessage', 'Berhasil menambahkan data Pegawai');
@@ -70,19 +70,48 @@ module.exports = {
         try {
             const { id, nama, unker, nik, npwp, no_rek_jateng, no_rek_bni, no_bpjs_kes, no_bpjs_ket} = req.body;
             const pegawai = await Pegawai.findOne({_id: id});
-            pegawai.nama = nama;
-            pegawai.unker = unker;
-            pegawai.nik = nik;
-            pegawai.npwp = npwp;
-            pegawai.no_rek_jateng = no_rek_jateng;
-            pegawai.no_rek_bni = no_rek_bni;
-            pegawai.no_bpjs_kes = no_bpjs_kes;
-            pegawai.no_bpjs_ket = no_bpjs_ket;
-            await pegawai.save();
-
-            req.flash('alertMessage', 'Berhasil mengubah data Pegawai');
-            req.flash('alertStatus', 'success');
-            res.redirect("/admin/pegawai");
+            if (req.files == undefined) {
+                pegawai.nama = nama;
+                pegawai.unker = unker;
+                pegawai.nik = nik;
+                pegawai.npwp = npwp;
+                pegawai.no_rek_jateng = no_rek_jateng;
+                pegawai.no_rek_bni = no_rek_bni;
+                pegawai.no_bpjs_kes = no_bpjs_kes;
+                pegawai.no_bpjs_ket = no_bpjs_ket;
+                await pegawai.save();
+                req.flash('alertMessage', 'Berhasil mengubah data Pegawai');
+                req.flash('alertStatus', 'success');
+                res.redirect("/admin/pegawai");
+            } else {
+                await fs.unlink(path.join(`public/${pegawai.file_SK}`));
+                await fs.unlink(path.join(`public/${pegawai.foto_ktp}`));
+                await fs.unlink(path.join(`public/${pegawai.foto_npwp}`));
+                await fs.unlink(path.join(`public/${pegawai.foto_rek_jateng}`));
+                await fs.unlink(path.join(`public/${pegawai.foto_rek_bni}`));
+                await fs.unlink(path.join(`public/${pegawai.foto_bpjs_kes}`));
+                await fs.unlink(path.join(`public/${pegawai.foto_bpjs_ket}`));
+                pegawai.nama = nama;
+                pegawai.unker = unker;
+                pegawai.nik = nik;
+                pegawai.npwp = npwp;
+                pegawai.no_rek_jateng = no_rek_jateng;
+                pegawai.no_rek_bni = no_rek_bni;
+                pegawai.no_bpjs_kes = no_bpjs_kes;
+                pegawai.no_bpjs_ket = no_bpjs_ket;
+                pegawai.file_SK = `uploads/${req.files.file_SK[0].filename}`,
+                pegawai.foto_ktp = `uploads/${req.files.foto_ktp[0].filename}`,
+                pegawai.foto_npwp = `uploads/${req.files.foto_npwp[0].filename}`,
+                pegawai.foto_rek_jateng = `uploads/${req.files.foto_rek_jateng[0].filename}`,
+                pegawai.foto_rek_bni = `uploads/${req.files.foto_rek_bni[0].filename}`,
+                pegawai.foto_bpjs_kes = `uploads/${req.files.foto_bpjs_kes[0].filename}`,
+                pegawai.foto_bpjs_ket = `uploads/${req.files.foto_bpjs_ket[0].filename}`
+                await pegawai.save();
+                req.flash('alertMessage', 'Berhasil mengubah data Pegawai');
+                req.flash('alertStatus', 'success');
+                res.redirect("/admin/pegawai");
+            }
+            console.log(req.files.file_SK[0])
         } catch (error) {
             req.flash('alertMessage', `${error.message}`);
             req.flash('alertStatus', 'danger');
@@ -93,6 +122,13 @@ module.exports = {
         try {
             const { id } = req.params;
             const pegawai = await Pegawai.findOne({_id: id});
+                await fs.unlink(path.join(`public/${pegawai.file_SK}`));
+                await fs.unlink(path.join(`public/${pegawai.foto_ktp}`));
+                await fs.unlink(path.join(`public/${pegawai.foto_npwp}`));
+                await fs.unlink(path.join(`public/${pegawai.foto_rek_jateng}`));
+                await fs.unlink(path.join(`public/${pegawai.foto_rek_bni}`));
+                await fs.unlink(path.join(`public/${pegawai.foto_bpjs_kes}`));
+                await fs.unlink(path.join(`public/${pegawai.foto_bpjs_ket}`));
             await pegawai.remove();
             req.flash('alertMessage', 'Berhasil menghapus data Pegawai');
             req.flash('alertStatus', 'success');

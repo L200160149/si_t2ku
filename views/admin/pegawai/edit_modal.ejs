@@ -8,7 +8,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form action="/admin/pegawai?_method=PUT" method="POST">
+        <form action="/admin/pegawai?_method=PUT" method="POST" enctype="multipart/form-data">
         <div class="modal-body">
             <div class="form-group">
                 <label for="nama">Nama <span class="text-danger">*</span></label>
@@ -56,26 +56,34 @@
                 <label for="no_bpjs_ket">Nomor BPJS Ketenagakerjaan <span class="text-danger">*</span></label>
                 <input type="number" class="form-control no_bpjs_ket" name="no_bpjs_ket" id="no_bpjs_ket" placeholder="Masukkan Nomor BPJS Ketenagakerjaan ...">
             </div>
-            <!-- <div class="form-group">
+            <div class="form-group">
+                <label for="foto_ktp">Foto KTP <span class="text-danger">*</span></label>
+                <input type="file" class="form-control foto_ktp" name="foto_ktp" id="foto_ktp">
+            </div>
+            <div class="form-group">
                 <label for="foto_npwp">Foto NPWP <span class="text-danger">*</span></label>
-                <input type="file" class="form-control" name="foto_npwp" id="foto_npwp">
+                <input type="file" class="form-control foto_npwp" name="foto_npwp" id="foto_npwp">
             </div>
             <div class="form-group">
                 <label for="foto_rek_jateng">Foto Rekening Bank Jateng <span class="text-danger">*</span></label>
-                <input type="file" class="form-control" name="foto_rek_jateng" id="foto_rek_jateng">
+                <input type="file" class="form-control foto_rek_jateng" name="foto_rek_jateng" id="foto_rek_jateng">
             </div>
             <div class="form-group">
                 <label for="foto_rek_bni">Foto Rekening Bank BNI <span class="text-danger">*</span></label>
-                <input type="file" class="form-control" name="foto_rek_bni" id="foto_rek_bni">
+                <input type="file" class="form-control foto_rek_bni" name="foto_rek_bni" id="foto_rek_bni">
             </div>
             <div class="form-group">
                 <label for="foto_bpjs_kes">Foto BPJS Kesehatan <span class="text-danger">*</span></label>
-                <input type="file" class="form-control" name="foto_bpjs_kes" id="foto_bpjs_kes">
+                <input type="file" class="form-control foto_bpjs_kes" name="foto_bpjs_kes" id="foto_bpjs_kes">
             </div>
             <div class="form-group">
                 <label for="foto_bpjs_ket">Foto BPJS Ketenagakerjaan <span class="text-danger">*</span></label>
-                <input type="file" class="form-control" name="foto_bpjs_ket" id="foto_bpjs_ket">
-            </div> -->
+                <input type="file" class="form-control foto_bpjs_ket" name="foto_bpjs_ket" id="foto_bpjs_ket">
+            </div>
+            <div class="form-group">
+                <label for="file_SK">File SK <span class="text-danger">*</span></label>
+                <input type="file" class="form-control file_SK" name="file_SK" id="file_SK">
+            </div>
         </div>
         <div class="modal-footer">
             <input type="hidden" class="id" name="id">

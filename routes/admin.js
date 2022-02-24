@@ -34,7 +34,7 @@ router.get('/pegawai', adminController.viewPegawai);
 
 // const cpUpload = upload.fields([{ name: 'foto_ktp'}, { name: 'file_SK'}])
 router.post('/pegawai', uploadPegawai, adminController.addPegawai);
-router.put('/pegawai', adminController.editPegawai);
+router.put('/pegawai', uploadPegawai, adminController.editPegawai);
 router.delete('/pegawai/:id', adminController.deletePegawai);
 // route gaji
 router.get('/gaji', adminController.viewGaji);
