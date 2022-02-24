@@ -37,6 +37,7 @@ module.exports = {
     },
     addPegawai: async (req, res) => {
         try {
+            console.log(req.files.file_SK[0].filename)
             const { nama, unker, nik, npwp, no_rek_jateng, no_rek_bni, no_bpjs_kes, no_bpjs_ket } = req.body;
             await Pegawai.create({ 
                 nama,
@@ -47,7 +48,14 @@ module.exports = {
                 no_rek_bni, 
                 no_bpjs_kes, 
                 no_bpjs_ket,
-                file_SK: `uploads/SK/${req.file.filename}` 
+                file_SK: `uploads/${req.files.file_SK[0].filename}`,
+                foto_ktp: `uploads/${req.files.foto_ktp[0].filename}`,
+                foto_npwp: `uploads/${req.files.foto_npwp[0].filename}`,
+                foto_rek_jateng: `uploads/${req.files.foto_rek_jateng[0].filename}`,
+                foto_rek_bni: `uploads/${req.files.foto_rek_bni[0].filename}`,
+                foto_bpjs_kes: `uploads/${req.files.foto_bpjs_kes[0].filename}`,
+                foto_bpjs_kes: `uploads/${req.files.foto_bpjs_kes[0].filename}`,
+                foto_bpjs_ket: `uploads/${req.files.foto_bpjs_ket[0].filename}`,
             });
             req.flash('alertMessage', 'Berhasil menambahkan data Pegawai');
             req.flash('alertStatus', 'success');
