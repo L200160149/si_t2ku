@@ -2,6 +2,8 @@ const Pegawai = require("../models/Pegawai")
 const fs = require('fs-extra');
 const path = require('path');
 
+const { check  } = require('express-validator');
+
 module.exports = {
     // dashboard
     viewDashboard: async (req, res) => {

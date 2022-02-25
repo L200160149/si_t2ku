@@ -75,35 +75,63 @@
                                         <tbody>
                                           <tr>
                                             <td>1. Nama</td>
-                                            <td>: <%= pegawai[i].nama %> </td>
+                                            <td><%= pegawai[i].nama %> </td>
                                           </tr>
                                           <tr>
                                             <td>2. Unit Kerja</td>
-                                            <td>: <%= pegawai[i].unker %> </td>
+                                            <td><%= pegawai[i].unker %> </td>
                                           </tr>
                                           <tr>
                                             <td>3. NIK</td>
-                                            <td>: <%= pegawai[i].nik %> </td>
+                                            <td><%= pegawai[i].nik %> </td>
                                           </tr>
                                           <tr>
                                             <td>4. NPWP</td>
-                                            <td>: <%= pegawai[i].npwp %> </td>
+                                            <td><%= pegawai[i].npwp %> </td>
                                           </tr>
                                           <tr>
                                             <td>5. Nomor Rekening Bank Jateng</td>
-                                            <td>: <%= pegawai[i].no_rek_jateng %> </td>
+                                            <td><%= pegawai[i].no_rek_jateng %> </td>
                                           </tr>
                                           <tr>
                                             <td>6. Nomor Rekening Bank BNI</td>
-                                            <td>: <%= pegawai[i].no_rek_bni %> </td>
+                                            <td><%= pegawai[i].no_rek_bni %> </td>
                                           </tr>
                                           <tr>
                                             <td>7. Nomor BPJS Kesehatan</td>
-                                            <td>: <%= pegawai[i].no_bpjs_kes %> </td>
+                                            <td><%= pegawai[i].no_bpjs_kes %> </td>
                                           </tr>
                                           <tr>
                                             <td>8. Nomor BPJS Ketenagakerjaan</td>
-                                            <td>: <%= pegawai[i].no_bpjs_ket %> </td>
+                                            <td><%= pegawai[i].no_bpjs_ket %> </td>
+                                          </tr>
+                                          <tr>
+                                            <td>9. SK</td>
+                                            <td><img width="200" src="http://localhost:3000/public/<%= pegawai[i].file_SK %>"/></td>
+                                          </tr>
+                                          <tr>
+                                            <td>10. KTP</td>
+                                            <td><img width="200" src="http://localhost:3000/public/<%= pegawai[i].foto_ktp %>"/></td>
+                                          </tr>
+                                          <tr>
+                                            <td>11. NPWP</td>
+                                            <td><img width="200" src="http://localhost:3000/public/<%= pegawai[i].foto_npwp %>"/></td>
+                                          </tr>
+                                          <tr>
+                                            <td>12. Rek. Bank Jateng</td>
+                                            <td><img width="200" src="http://localhost:3000/public/<%= pegawai[i].foto_rek_jateng %>"/></td>
+                                          </tr>
+                                          <tr>
+                                            <td>13. Rek. Bank BNI</td>
+                                            <td><img width="200" src="http://localhost:3000/public/<%= pegawai[i].foto_rek_bni %>"/></td>
+                                          </tr>
+                                          <tr>
+                                            <td>14. BPJS Kesehatan</td>
+                                            <td><img width="200" src="http://localhost:3000/public/<%= pegawai[i].foto_bpjs_kes %>"/></td>
+                                          </tr>
+                                          <tr>
+                                            <td>15. BPJS Ketenagakerjaan</td>
+                                            <td><img width="200" src="http://localhost:3000/public/<%= pegawai[i].foto_bpjs_ket %>"/></td>
                                           </tr>
                                         </tbody>
                                       </table>
