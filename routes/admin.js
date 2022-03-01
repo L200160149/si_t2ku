@@ -26,18 +26,21 @@ var uploadPegawai = upload.fields([
     { name: 'foto_bpjs_ket' },
 ])
 
+var uploadGaji = upload.fields([
+    { name: 'file' },
+])
+
 
 // route dashboard
 router.get('/dashboard', adminController.viewDashboard);
 // route pegawai
 router.get('/pegawai', adminController.viewPegawai);
-
-// const cpUpload = upload.fields([{ name: 'foto_ktp'}, { name: 'file_SK'}])
 router.post('/pegawai', uploadPegawai, adminController.addPegawai);
 router.put('/pegawai', uploadPegawai, adminController.editPegawai);
 router.delete('/pegawai/:id', adminController.deletePegawai);
 // route gaji
 router.get('/gaji', adminController.viewGaji);
+router.post('/gaji', uploadGaji, adminController.addGaji);
 // route pemasukan
 router.get('/pemasukan', adminController.viewPemasukan);
 // route pengeluaran

@@ -1,0 +1,77 @@
+<!-- Main content -->
+<div class="content">
+    <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card card-primary card-outline">
+                <div class="card-header">
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#add-modal"><i class="nav-icon fas fa-plus"></i> Tambah</button>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered table-striped" id="dataTable">
+                        <thead>
+                          <tr>
+                            <th>No.</th>
+                            <th>Nama</th>
+                            <th>Tanggal</th>
+                            <th>Status</th>
+                            <th>File</th>
+                            <th>Aksi</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        <% for (let i = 0; i < gaji.length; i++) { %> 
+                        <tr>
+                          <td><%= i + 1 %></td>
+                          <td><%= gaji[i].nama %></td>
+                          <td><%= gaji[i].tanggal %></td>
+                          <td><%= gaji[i].status %></td>
+                          <td><%= gaji[i].file %></td>
+                          <td>
+                              <a href="javascript:void()" type="button" class="btn btn-info button-update"
+                                data-id="<%= gaji[i].id %>"
+                                data-nama="<%= gaji[i].nama %>"
+                                data-unker="<%= gaji[i].unker %>"
+                                data-nik="<%= gaji[i].nik %>"
+                                data-npwp="<%= gaji[i].npwp %>"
+                                data-no_rek_jateng="<%= gaji[i].no_rek_jateng %>"
+                                data-no_rek_bni="<%= gaji[i].no_rek_bni %>"
+                                data-no_bpjs_kes="<%= gaji[i].no_bpjs_kes %>"
+                                data-no_bpjs_ket="<%= gaji[i].no_bpjs_ket %>"
+                              ><i class="nav-icon fas fa-pencil-alt"></i> </a>
+                              <button class="btn btn-danger" data-toggle="modal" data-target="#delete_modal<%= gaji[i].id %>"><i class="nav-icon fas fa-trash"></i> </button>
+                            
+                              <!-- Modal Hapus -->
+                              <div class="modal fade" id="delete_modal<%= gaji[i].id %>" tabindex="-1" role="dialog" aria-labelledby="delete_modalTitle" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="delete_modalTitle">Hapus Data Gaji ?</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                      Data yang sudah di hapus tidak dapat dikembalikan lagi.
+                                    </div>
+                                    <div class="modal-footer">
+                                    <form action="/admin/gaji/<%= gaji[i].id %>?_method=DELETE" method="POST">
+                                      <button type="submit" class="btn btn-danger">Hapus</button>
+                                    </form>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                          </td>
+                        </tr>
+                        <% } %> 
+                        </tbody>
+                    </table>
+                </div>
+              </div>
+          </div>
+        </div>
+      <!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content -->

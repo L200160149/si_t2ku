@@ -1,0 +1,81 @@
+<!-- Modal -->
+<div class="modal fade" id="add-modal" tabindex="-1" role="dialog" aria-labelledby="add-modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="add-modal">Tambah Data Gaji</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form action="/admin/pegawai" method="POST" enctype="multipart/form-data">
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="unker">Unit Kerja <span class="text-danger">*</span></label>
+                <select name="unker" id="unker" class="form-control">
+                    <option value="">-- Pilih Unit Kerja --</option>
+                    <% for (let i = 0; i < pegawai.length; i++) { %> 
+                    <option value="BP2"><%= pegawai[i].nama %></option>
+                    <% } %> 
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="nik">NIK <span class="text-danger">*</span></label>
+                <input type="number" class="form-control" name="nik" id="nik" placeholder="Masukkan NIK Pegawai ...">
+            </div>
+            <div class="form-group">
+                <label for="npwp">NPWP <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" name="npwp" id="npwp" placeholder="Masukkan NPWP ...">
+            </div>
+            <div class="form-group">
+                <label for="no_rek_jateng">Nomor Rekening Bank Jateng <span class="text-danger">*</span></label>
+                <input type="number" class="form-control" name="no_rek_jateng" id="no_rek_jateng" placeholder="Masukkan Nomor Rekening Bank Jateng ...">
+            </div>
+            <div class="form-group">
+                <label for="no_rek_bni">Nomor Rekening Bank BNI <span class="text-danger">*</span></label>
+                <input type="number" class="form-control" name="no_rek_bni" id="no_rek_bni" placeholder="Masukkan Nomor Rekening Bank BNI ...">
+            </div>
+            <div class="form-group">
+                <label for="no_bpjs_kes">Nomor BPJS Kesehatan <span class="text-danger">*</span></label>
+                <input type="number" class="form-control" name="no_bpjs_kes" id="no_bpjs_kes" placeholder="Masukkan Nomor BPJS Kesehatan ...">
+            </div>
+            <div class="form-group">
+                <label for="no_bpjs_ket">Nomor BPJS Ketenagakerjaan <span class="text-danger">*</span></label>
+                <input type="number" class="form-control" name="no_bpjs_ket" id="no_bpjs_ket" placeholder="Masukkan Nomor BPJS Ketenagakerjaan ...">
+            </div>
+            <div class="form-group">
+                <label for="foto_ktp">Foto KTP <span class="text-danger">*</span></label>
+                <input type="file" class="form-control" name="foto_ktp" id="foto_ktp">
+            </div>
+            <div class="form-group">
+                <label for="foto_npwp">Foto NPWP <span class="text-danger">*</span></label>
+                <input type="file" class="form-control" name="foto_npwp" id="foto_npwp">
+            </div>
+            <div class="form-group">
+                <label for="foto_rek_jateng">Foto Rekening Bank Jateng <span class="text-danger">*</span></label>
+                <input type="file" class="form-control" name="foto_rek_jateng" id="foto_rek_jateng">
+            </div>
+            <div class="form-group">
+                <label for="foto_rek_bni">Foto Rekening Bank BNI <span class="text-danger">*</span></label>
+                <input type="file" class="form-control" name="foto_rek_bni" id="foto_rek_bni">
+            </div>
+            <div class="form-group">
+                <label for="foto_bpjs_kes">Foto BPJS Kesehatan <span class="text-danger">*</span></label>
+                <input type="file" class="form-control" name="foto_bpjs_kes" id="foto_bpjs_kes">
+            </div>
+            <div class="form-group">
+                <label for="foto_bpjs_ket">Foto BPJS Ketenagakerjaan <span class="text-danger">*</span></label>
+                <input type="file" class="form-control" name="foto_bpjs_ket" id="foto_bpjs_ket">
+            </div>
+            <div class="form-group">
+                <label for="file_SK">File SK <span class="text-danger">*</span></label>
+                <input type="file" class="form-control" name="file_SK" id="file_SK">
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Tambah</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>

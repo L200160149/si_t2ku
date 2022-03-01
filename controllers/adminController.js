@@ -1,4 +1,5 @@
 const Pegawai = require("../models/Pegawai")
+const Gaji = require("../models/Gaji")
 const fs = require('fs-extra');
 const path = require('path');
 
@@ -144,12 +145,42 @@ module.exports = {
     // akhir pegawai
 
     viewGaji: async (req, res) => {
+        const gaji = await Gaji.find();
+        const pegawai = await Pegawai.find();
+        // alert
+        const alertMessage = req.flash('alertMessage');
+        const alertStatus = req.flash('alertStatus');
+        const alert = { 
+            message: alertMessage, 
+            status: alertStatus,
+        };
         try {
             res.render("admin/gaji/view_gaji", {
-                title: 'Data Gaji | T2KU BMCK Jateng'
+                title: 'Data Gaji | T2KU BMCK Jateng',
+                alert,
+                gaji,
+                pegawai
             })
         } catch (error) {
             console.log(error)
+        }
+    },
+    addGaji: async (req, res) => {
+        try {
+            const { gajiId, tanggal, file, status } = req.body;
+            await Gaji.create({ 
+                tanggal,
+                status,
+                gajiId,
+                file: `uploads/${req.files.file[0].filename}`,
+            });
+            req.flash('alertMessage', 'Berhasil menambahkan data Gaji');
+            req.flash('alertStatus', 'success');
+            res.redirect("/admin/gaji");
+        } catch (error) {
+            req.flash('alertMessage', `${error.message}`);
+            req.flash('alertStatus', 'danger');
+            res.redirect("/admin/gaji");
         }
     },
     viewPemasukan: async (req, res) => {
