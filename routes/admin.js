@@ -44,7 +44,7 @@ router.post('/jabatan', adminController.addJabatan);
 router.put('/jabatan', adminController.editJabatan);
 router.delete('/jabatan/:id', adminController.deleteJabatan);
 // route cetakgaji
-router.post('/cetakgaji', adminController.cetakGaji);
+router.get('/cetakgaji', adminController.cetakGaji);
 // route gaji
 router.get('/gaji', adminController.viewGaji);
 // route pemasukan

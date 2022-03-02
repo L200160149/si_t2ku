@@ -1,6 +1,9 @@
 const Pegawai = require("../models/Pegawai")
 const Gaji = require("../models/Gaji")
 const Jabatan = require("../models/Jabatan");
+
+let pdf = require("html-pdf");
+let ejs = require("ejs");
 const fs = require('fs-extra');
 const path = require('path');
 
@@ -262,11 +265,35 @@ module.exports = {
     // },
     cetakGaji: async (req, res) => {
         try {
-            console.log(req.body.nama)
-            console.log(req.body.bulan)
-            console.log(req.body.tahun)
+            const { id } = req.body;
+            const pegawai = await Pegawai.findOne({_id: id})
+            .populate({ path: 'jabatanId'})
+            console.log(pegawai)
+            ejs.renderFile(path.join('./views/', "report.ejs"), {pegawai}, (err, data) => {
+                if (err) {
+                      res.send(err);
+                } else {
+                    let options = {
+                        "height": "11.25in",
+                        "width": "8.5in",
+                        "header": {
+                            "height": "20mm"
+                        },
+                        "footer": {
+                            "height": "20mm",
+                        },
+                    };
+                    pdf.create(data, options).toFile("report.pdf", function (err, data) {
+                        if (err) {
+                            res.send(err);
+                        } else {
+                            res.send("File created successfully");
+                        }
+                    });
+                }
+            });
         } catch (error) {
-            
+            console.log(error)
         }
     },
     viewPemasukan: async (req, res) => {

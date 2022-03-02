@@ -8,14 +8,14 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form action="/admin/cetakgaji" method="POST">
+        <form action="/admin/cetakgaji" method="GET">
         <div class="modal-body">
             <div class="form-group">
                 <label for="nama">Nama Pegawai <span class="text-danger">*</span></label>
                 <select name="nama" id="nama" class="form-control">
                     <option value="">-- Pilih Unit Kerja --</option>
                     <% for (let i = 0; i < pegawai.length; i++) { %> 
-                    <option value="BP2"><%= pegawai[i].nama %></option>
+                    <option value="<%= pegawai[i].nama %>"><%= pegawai[i].nama %></option>
                     <% } %> 
                 </select>
             </div>
@@ -47,6 +47,7 @@
             </div>
         </div>
         <div class="modal-footer">
+          <input type="hidden" name="id" value="621ee5d50b31b4e1c1465a8b">
           <button type="submit" class="btn btn-primary">Cetak</button>
         </div>
         </form>
