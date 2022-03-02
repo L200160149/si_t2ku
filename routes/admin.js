@@ -38,9 +38,15 @@ router.get('/pegawai', adminController.viewPegawai);
 router.post('/pegawai', uploadPegawai, adminController.addPegawai);
 router.put('/pegawai', uploadPegawai, adminController.editPegawai);
 router.delete('/pegawai/:id', adminController.deletePegawai);
+// route jabatan
+router.get('/jabatan', adminController.viewJabatan);
+router.post('/jabatan', adminController.addJabatan);
+router.put('/jabatan', adminController.editJabatan);
+router.delete('/jabatan/:id', adminController.deleteJabatan);
+// route cetakgaji
+router.post('/cetakgaji', adminController.cetakGaji);
 // route gaji
 router.get('/gaji', adminController.viewGaji);
-router.post('/gaji', uploadGaji, adminController.addGaji);
 // route pemasukan
 router.get('/pemasukan', adminController.viewPemasukan);
 // route pengeluaran

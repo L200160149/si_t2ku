@@ -14,6 +14,7 @@
                           <th>No.</th>
                           <th>Nama</th>
                           <th>Unker</th>
+                          <th>Jabatan</th>
                           <th>Aksi</th>
                         </tr>
                         </thead>
@@ -23,6 +24,7 @@
                           <td><%= i + 1 %></td>
                           <td><%= pegawai[i].nama %></td>
                           <td><%= pegawai[i].unker %></td>
+                          <td><%= pegawai[i].jabatanId.jabatan %>, <%= pegawai[i].jabatanId.pendidikan %></td>
                           <td>
                               <a href="javascript:void()" type="button" class="btn btn-info button-update"
                                 data-id="<%= pegawai[i].id %>"
@@ -34,6 +36,8 @@
                                 data-no_rek_bni="<%= pegawai[i].no_rek_bni %>"
                                 data-no_bpjs_kes="<%= pegawai[i].no_bpjs_kes %>"
                                 data-no_bpjs_ket="<%= pegawai[i].no_bpjs_ket %>"
+                                data-tanggal_masuk="<%= pegawai[i].tanggal_masuk %>"
+                                data-jabatanId="<%= pegawai[i].jabatanId %>"
                               ><i class="nav-icon fas fa-pencil-alt"></i> </a>
                               <button class="btn btn-secondary" data-toggle="modal" data-target="#detail_modal<%= pegawai[i].id %>"><i class="nav-icon fas fa-eye"></i> </button>
                               <button class="btn btn-danger" data-toggle="modal" data-target="#delete_modal<%= pegawai[i].id %>"><i class="nav-icon fas fa-trash"></i> </button>
@@ -106,31 +110,39 @@
                                             <td><%= pegawai[i].no_bpjs_ket %> </td>
                                           </tr>
                                           <tr>
-                                            <td>9. SK</td>
+                                            <td>9. Tanggal Masuk</td>
+                                            <td><%= pegawai[i].tanggal_masuk %> </td>
+                                          </tr>
+                                          <tr>
+                                            <td>10. Jabatan</td>
+                                            <td><%= pegawai[i].jabatanId.jabatan %>, <%= pegawai[i].jabatanId.pendidikan %> </td>
+                                          </tr>
+                                          <tr>
+                                            <td>11. SK</td>
                                             <td><img width="200" src="http://localhost:3000/public/<%= pegawai[i].file_SK %>"/></td>
                                           </tr>
                                           <tr>
-                                            <td>10. KTP</td>
+                                            <td>12. KTP</td>
                                             <td><img width="200" src="http://localhost:3000/public/<%= pegawai[i].foto_ktp %>"/></td>
                                           </tr>
                                           <tr>
-                                            <td>11. NPWP</td>
+                                            <td>13. NPWP</td>
                                             <td><img width="200" src="http://localhost:3000/public/<%= pegawai[i].foto_npwp %>"/></td>
                                           </tr>
                                           <tr>
-                                            <td>12. Rek. Bank Jateng</td>
+                                            <td>14. Rek. Bank Jateng</td>
                                             <td><img width="200" src="http://localhost:3000/public/<%= pegawai[i].foto_rek_jateng %>"/></td>
                                           </tr>
                                           <tr>
-                                            <td>13. Rek. Bank BNI</td>
+                                            <td>15. Rek. Bank BNI</td>
                                             <td><img width="200" src="http://localhost:3000/public/<%= pegawai[i].foto_rek_bni %>"/></td>
                                           </tr>
                                           <tr>
-                                            <td>14. BPJS Kesehatan</td>
+                                            <td>16. BPJS Kesehatan</td>
                                             <td><img width="200" src="http://localhost:3000/public/<%= pegawai[i].foto_bpjs_kes %>"/></td>
                                           </tr>
                                           <tr>
-                                            <td>15. BPJS Ketenagakerjaan</td>
+                                            <td>17. BPJS Ketenagakerjaan</td>
                                             <td><img width="200" src="http://localhost:3000/public/<%= pegawai[i].foto_bpjs_ket %>"/></td>
                                           </tr>
                                         </tbody>

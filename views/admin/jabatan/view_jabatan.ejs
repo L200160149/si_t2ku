@@ -10,13 +10,13 @@
         
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Data Pegawai</h1>
+            <h1 class="m-0">Data Jabatan</h1>
           </div><!-- /.col -->
 
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <!-- <li class="breadcrumb-item"><a href="#">Home</a></li> -->
-              <li class="breadcrumb-item active">Data Pegawai</li>
+              <li class="breadcrumb-item active">Data Jabatan</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -27,7 +27,7 @@
     </div>
     <!-- /.content-header -->
 
-    <%- include('table_pegawai.ejs') %> 
+    <%- include('table_jabatan.ejs') %> 
     
   </div>
   <!-- /.content-wrapper -->
@@ -42,26 +42,14 @@
   <script>
     $('#dataTable').on('click', '.button-update', function() {
       let id = $(this).data('id');
-      let nama = $(this).data('nama');
-      let unker = $(this).data('unker');
-      let nik = $(this).data('nik');
-      let npwp = $(this).data('npwp');
-      let no_rek_jateng = $(this).data('no_rek_jateng');
-      let no_rek_bni = $(this).data('no_rek_bni');
-      let no_bpjs_kes = $(this).data('no_bpjs_kes');
-      let no_bpjs_ket = $(this).data('no_bpjs_ket');
-      let tanggal_masuk = $(this).data('tanggal_masuk');
+      let jabatan = $(this).data('jabatan');
+      let pendidikan = $(this).data('pendidikan');
+      let gaji = $(this).data('gaji');
 
       $('#edit-modal').modal('show');
       $('.id').val(id);
-      $('.nama').val(nama);
-      $('.unker').val(unker);
-      $('.nik').val(nik);
-      $('.npwp').val(npwp);
-      $('.no_rek_jateng').val(no_rek_jateng);
-      $('.no_rek_bni').val(no_rek_bni);
-      $('.no_bpjs_kes').val(no_bpjs_kes);
-      $('.no_bpjs_ket').val(no_bpjs_ket);
-      $('.tanggal_masuk').val(tanggal_masuk);
+      $('.jabatan').val(jabatan);
+      $('.pendidikan').val(pendidikan);
+      $('.gaji').val(gaji);
     })
   </script>

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const {ObjectId} = mongoose.Schema;
 
 const pegawaiSchema = new mongoose.Schema({
     nama: {                   
@@ -33,6 +34,10 @@ const pegawaiSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    tanggal_masuk: {
+        type: Date,
+        required: false
+    },
     foto_ktp: {
         type: String,
         required: true
@@ -60,6 +65,10 @@ const pegawaiSchema = new mongoose.Schema({
     file_SK: {
         type: String,
         required: true
+    },
+    jabatanId: {
+        type: ObjectId,
+        ref: 'Jabatan'
     },
 })
 
