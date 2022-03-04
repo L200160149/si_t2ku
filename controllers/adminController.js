@@ -11,6 +11,8 @@ const { check  } = require('express-validator');
 const Pemasukan = require("../models/Pemasukan");
 const Pengeluaran = require("../models/Pengeluaran");
 
+const {rupiah} = require("../middlewares/formatRupiah")
+
 module.exports = {
     // dashboard
     viewDashboard: async (req, res) => {
@@ -301,6 +303,33 @@ module.exports = {
     viewPemasukan: async (req, res) => {
         try {
             const pemasukan = await Pemasukan.find();
+            const pengeluaran = await Pengeluaran.find();
+            
+            const totalPemasukan = await Pemasukan.aggregate([{
+                $group: {
+                   _id: '',
+                   "pemasukan": { $sum: '$jumlah_iuran' }
+                }
+                }, {
+                   $project: {
+                      _id: 0,
+                      "totalPemasukan": '$pemasukan'
+                   }
+             }]);
+
+            const totalPengeluaran = await Pengeluaran.aggregate([{
+                $group: {
+                   _id: '',
+                   "pengeluaran": { $sum: '$jumlah_pengeluaran' }
+                }
+                }, {
+                   $project: {
+                      _id: 0,
+                      "totalPengeluaran": '$pengeluaran'
+                   }
+             }]);
+             console.log(totalPengeluaran)
+
             // alert
             const alertMessage = req.flash('alertMessage');
             const alertStatus = req.flash('alertStatus');
@@ -313,6 +342,8 @@ module.exports = {
                 title: 'Data Pemasukan | T2KU BMCK Jateng',
                 alert,
                 pemasukan,
+                pengeluaran,
+                totalPemasukan : rupiah(totalPemasukan[0].totalPemasukan)
             })
         } catch (error) {
             console.log(error)
@@ -403,11 +434,11 @@ module.exports = {
             });
             req.flash('alertMessage', 'Berhasil menambahkan data Pengeluaran');
             req.flash('alertStatus', 'success');
-            res.redirect("/admin/pengeluaran");
+            res.redirect("/admin/pemasukan");
         } catch (error) {
             req.flash('alertMessage', `${error.message}`);
             req.flash('alertStatus', 'danger');
-            res.redirect("/admin/pengeluaran");
+            res.redirect("/admin/pemasukan");
         }
     },
     editPengeluaran: async (req, res) => {
@@ -420,11 +451,11 @@ module.exports = {
                 await pengeluaran.save();
                 req.flash('alertMessage', 'Berhasil mengubah data Pengeluaran');
                 req.flash('alertStatus', 'success');
-                res.redirect("/admin/pengeluaran");
+                res.redirect("/admin/pemasukan");
         } catch (error) {
             req.flash('alertMessage', `${error.message}`);
             req.flash('alertStatus', 'danger');
-            res.redirect("/admin/pengeluaran");
+            res.redirect("/admin/pemasukan");
         }
     },
     deletePengeluaran: async (req, res) => {
@@ -441,11 +472,11 @@ module.exports = {
             await pengeluaran.remove();
             req.flash('alertMessage', 'Berhasil menghapus data Pengeluaran');
             req.flash('alertStatus', 'success');
-            res.redirect("/admin/pengeluaran");
+            res.redirect("/admin/pemasukan");
         } catch (error) {
             req.flash('alertMessage', `${error.message}`);
             req.flash('alertStatus', 'danger');
-            res.redirect("/admin/pengeluaran");
+            res.redirect("/admin/pemasukan");
         }
     },
 }
