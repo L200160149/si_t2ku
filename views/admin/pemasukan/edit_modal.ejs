@@ -1,0 +1,33 @@
+<!-- Modal -->
+<div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="add-modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="add-modal">Tambah Data Pemasukan</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form action="/admin/pemasukan?_method=PUT" method="POST">
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="jumlah_iuran">Jumlah Iuran <span class="text-danger">*</span></label>
+                <input type="number" class="form-control jumlah_iuran" name="jumlah_iuran" id="jumlah_iuran" placeholder="Masukkan Jumlah Iuran ...">
+            </div>
+            <div class="form-group">
+                <label for="tanggal">Tanggal <span class="text-danger">*</span></label>
+                <input type="date" class="form-control tanggal" name="tanggal" id="tanggal">
+            </div>
+            <div class="form-group">
+                <label for="keterangan">Keterangan <span class="text-danger">*</span></label>
+                <textarea name="keterangan" class="form-control keterangan" id="keterangan" cols="30" rows="10"></textarea>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input type="hidden" class="id" name="id">
+          <button type="submit" class="btn btn-primary">Ubah</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>

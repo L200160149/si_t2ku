@@ -1,0 +1,82 @@
+<!-- Main content -->
+<div class="content">
+    <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-9">
+              <div class="card card-primary card-outline">
+                <div class="card-header">
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#add-modal"><i class="nav-icon fas fa-plus"></i> Tambah</button>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered table-striped" id="dataTable">
+                        <thead>
+                            <tr>
+                            <th>No.</th>
+                            <th>Pengeluaran</th>
+                            <th>Tanggal</th>
+                            <th>Keterangan</th>
+                            <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          <% for (let i = 0; i < pengeluaran.length; i++) { %> 
+                        <tr>
+                          <td><%= i + 1 %></td>
+                          <td><%= pengeluaran[i].jumlah_pengeluaran %></td>
+                          <td><%= pengeluaran[i].tanggal.getDate()%> - <%= pengeluaran[i].tanggal.getMonth()%> - <%= pengeluaran[i].tanggal.getYear() %></td>
+                          <td><%= pengeluaran[i].keterangan %></td>
+                          <td>
+                              <a href="javascript:void()" type="button" class="btn btn-info button-update"
+                                data-id="<%= pengeluaran[i].id %>"
+                                data-jumlah_pengeluaran="<%= pengeluaran[i].jumlah_pengeluaran %>"
+                                data-keterangan="<%= pengeluaran[i].keterangan %>"
+                              ><i class="nav-icon fas fa-pencil-alt"></i> </a>
+                              <button class="btn btn-danger" data-toggle="modal" data-target="#delete_modal<%= pengeluaran[i].id %>"><i class="nav-icon fas fa-trash"></i> </button>
+                            
+                              <!-- Modal Hapus -->
+                              <div class="modal fade" id="delete_modal<%= pengeluaran[i].id %>" tabindex="-1" role="dialog" aria-labelledby="delete_modalTitle" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="delete_modalTitle">Hapus Data pengeluaran ?</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                      Data yang sudah di hapus tidak dapat dikembalikan lagi.
+                                    </div>
+                                    <div class="modal-footer">
+                                    <form action="/admin/pengeluaran/<%= pengeluaran[i].id %>?_method=DELETE" method="POST">
+                                      <button type="submit" class="btn btn-danger">Hapus</button>
+                                    </form>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                          </td>
+                        </tr>
+                        <% } %> 
+                        </tbody>
+                    </table>
+                </div>
+              </div>
+          </div>
+          <div class="col-md-3">
+            <div class="small-box bg-info">
+                <div class="inner">
+                  <h3>150</h3>
+  
+                  <p>Jumlah Pengeluaran Saat Ini</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-bag"></i>
+                </div>
+              </div>
+          </div>
+        </div>
+      <!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content -->

@@ -8,6 +8,8 @@ const fs = require('fs-extra');
 const path = require('path');
 
 const { check  } = require('express-validator');
+const Pemasukan = require("../models/Pemasukan");
+const Pengeluaran = require("../models/Pengeluaran");
 
 module.exports = {
     // dashboard
@@ -298,20 +300,152 @@ module.exports = {
     },
     viewPemasukan: async (req, res) => {
         try {
+            const pemasukan = await Pemasukan.find();
+            // alert
+            const alertMessage = req.flash('alertMessage');
+            const alertStatus = req.flash('alertStatus');
+            const alert = { 
+                message: alertMessage, 
+                status: alertStatus,
+            };
+
             res.render("admin/pemasukan/view_pemasukan", {
-                title: 'Data Pemasukan | T2KU BMCK Jateng'
+                title: 'Data Pemasukan | T2KU BMCK Jateng',
+                alert,
+                pemasukan,
             })
         } catch (error) {
             console.log(error)
         }
     },
+    addPemasukan: async (req, res) => {
+        try {
+            const { jumlah_iuran, tanggal, keterangan} = req.body;
+            await Pemasukan.create({ 
+                jumlah_iuran,
+                tanggal, 
+                keterangan,
+            });
+            req.flash('alertMessage', 'Berhasil menambahkan data Pemasukan');
+            req.flash('alertStatus', 'success');
+            res.redirect("/admin/pemasukan");
+        } catch (error) {
+            req.flash('alertMessage', `${error.message}`);
+            req.flash('alertStatus', 'danger');
+            res.redirect("/admin/pemasukan");
+        }
+    },
+    editPemasukan: async (req, res) => {
+        try {
+            const { id, jumlah_iuran, tanggal, keterangan} = req.body;
+            const pemasukan = await Pemasukan.findOne({_id: id});
+                pemasukan.jumlah_iuran = jumlah_iuran;
+                pemasukan.tanggal = tanggal;
+                pemasukan.keterangan = keterangan;
+                await pemasukan.save();
+                req.flash('alertMessage', 'Berhasil mengubah data Pemasukan');
+                req.flash('alertStatus', 'success');
+                res.redirect("/admin/pemasukan");
+        } catch (error) {
+            req.flash('alertMessage', `${error.message}`);
+            req.flash('alertStatus', 'danger');
+            res.redirect("/admin/pemasukan");
+        }
+    },
+    deletePemasukan: async (req, res) => {
+        try {
+            const { id } = req.params;
+            const pemasukan = await Pemasukan.findOne({_id: id});
+                // await fs.unlink(path.join(`public/${pemasukan.file_SK}`));
+                // await fs.unlink(path.join(`public/${pemasukan.foto_ktp}`));
+                // await fs.unlink(path.join(`public/${pemasukan.foto_npwp}`));
+                // await fs.unlink(path.join(`public/${pemasukan.foto_rek_jateng}`));
+                // await fs.unlink(path.join(`public/${pemasukan.foto_rek_bni}`));
+                // await fs.unlink(path.join(`public/${pemasukan.foto_bpjs_kes}`));
+                // await fs.unlink(path.join(`public/${pemasukan.foto_bpjs_ket}`));
+            await pemasukan.remove();
+            req.flash('alertMessage', 'Berhasil menghapus data Pemasukan');
+            req.flash('alertStatus', 'success');
+            res.redirect("/admin/pemasukan");
+        } catch (error) {
+            req.flash('alertMessage', `${error.message}`);
+            req.flash('alertStatus', 'danger');
+            res.redirect("/admin/pemasukan");
+        }
+    },
     viewPengeluaran: async (req, res) => {
         try {
+            const pengeluaran = await Pengeluaran.find();
+            // alert
+            const alertMessage = req.flash('alertMessage');
+            const alertStatus = req.flash('alertStatus');
+            const alert = { 
+                message: alertMessage, 
+                status: alertStatus,
+            };
+
             res.render("admin/pengeluaran/view_pengeluaran", {
-                title: 'Data Pengeluaran | T2KU BMCK Jateng'
+                title: 'Data Pengeluaran | T2KU BMCK Jateng',
+                alert,
+                pengeluaran,
             })
         } catch (error) {
             console.log(error)
+        }
+    },
+    addPengeluaran: async (req, res) => {
+        try {
+            const { jumlah_pengeluaran, tanggal, keterangan} = req.body;
+            await Pengeluaran.create({ 
+                jumlah_pengeluaran,
+                tanggal, 
+                keterangan,
+            });
+            req.flash('alertMessage', 'Berhasil menambahkan data Pengeluaran');
+            req.flash('alertStatus', 'success');
+            res.redirect("/admin/pengeluaran");
+        } catch (error) {
+            req.flash('alertMessage', `${error.message}`);
+            req.flash('alertStatus', 'danger');
+            res.redirect("/admin/pengeluaran");
+        }
+    },
+    editPengeluaran: async (req, res) => {
+        try {
+            const { id, jumlah_pengeluaran, tanggal, keterangan} = req.body;
+            const pengeluaran = await Pengeluaran.findOne({_id: id});
+                pengeluaran.jumlah_pengeluaran = jumlah_pengeluaran;
+                pengeluaran.tanggal = tanggal;
+                pengeluaran.keterangan = keterangan;
+                await pengeluaran.save();
+                req.flash('alertMessage', 'Berhasil mengubah data Pengeluaran');
+                req.flash('alertStatus', 'success');
+                res.redirect("/admin/pengeluaran");
+        } catch (error) {
+            req.flash('alertMessage', `${error.message}`);
+            req.flash('alertStatus', 'danger');
+            res.redirect("/admin/pengeluaran");
+        }
+    },
+    deletePengeluaran: async (req, res) => {
+        try {
+            const { id } = req.params;
+            const pengeluaran = await Pengeluaran.findOne({_id: id});
+                // await fs.unlink(path.join(`public/${pengeluaran.file_SK}`));
+                // await fs.unlink(path.join(`public/${pengeluaran.foto_ktp}`));
+                // await fs.unlink(path.join(`public/${pengeluaran.foto_npwp}`));
+                // await fs.unlink(path.join(`public/${pengeluaran.foto_rek_jateng}`));
+                // await fs.unlink(path.join(`public/${pengeluaran.foto_rek_bni}`));
+                // await fs.unlink(path.join(`public/${pengeluaran.foto_bpjs_kes}`));
+                // await fs.unlink(path.join(`public/${pengeluaran.foto_bpjs_ket}`));
+            await pengeluaran.remove();
+            req.flash('alertMessage', 'Berhasil menghapus data Pengeluaran');
+            req.flash('alertStatus', 'success');
+            res.redirect("/admin/pengeluaran");
+        } catch (error) {
+            req.flash('alertMessage', `${error.message}`);
+            req.flash('alertStatus', 'danger');
+            res.redirect("/admin/pengeluaran");
         }
     },
 }
