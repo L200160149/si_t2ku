@@ -14,6 +14,25 @@ const Pengeluaran = require("../models/Pengeluaran");
 const {rupiah} = require("../middlewares/formatRupiah")
 
 module.exports = {
+    // login
+        viewLogin: async (req, res) => {
+            try {
+                // alert
+                const alertMessage = req.flash('alertMessage');
+                const alertStatus = req.flash('alertStatus');
+                const alert = { 
+                    message: alertMessage, 
+                    status: alertStatus,
+                };
+                res.render("login/view_login", {
+                    title: 'Halaman Login | T2KU BMCK Jateng',
+                    alert
+                })
+            } catch (error) {
+                console.log(error)
+            }
+        },
+    // end login
     // dashboard
     viewDashboard: async (req, res) => {
         const totalPegawai = await Pegawai.find().count();
@@ -46,7 +65,6 @@ module.exports = {
                 totalPegawai,
                 jumlahTotal : rupiah(totalPemasukan[0].totalPemasukan - totalPengeluaran[0].totalPengeluaran),
             })
-            console.log(Pegawai)
         } catch (error) {
             console.log(error)
         }
