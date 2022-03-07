@@ -2,7 +2,45 @@
 <div class="content">
     <div class="container-fluid">
       <div class="row">
-          <div class="col-md-5">
+        <div class="col-md-4">
+          <div class="small-box bg-info">
+              <div class="inner">
+                <h3><%= jumlahTotal %> </h3>
+
+                <p>Jumlah Iuran Saat Ini</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-bag"></i>
+              </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+          <div class="small-box bg-secondary">
+              <div class="inner">
+                <h3><%= totalPemasukan %> </h3>
+
+                <p>Total Pemasukan</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-bag"></i>
+              </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+          <div class="small-box bg-danger">
+              <div class="inner">
+                <h3><%= totalPengeluaran %> </h3>
+
+                <p>Total Pengeluaran</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-bag"></i>
+              </div>
+            </div>
+        </div>
+      </div>
+      <div class="row">
+          <div class="col-md-6">
               <div class="card card-primary card-outline">
                 <div class="card-header">
                     <button class="btn btn-primary" data-toggle="modal" data-target="#add-modal"><i class="nav-icon fas fa-plus"></i> Tambah</button>
@@ -63,13 +101,13 @@
                 </div>
               </div>
           </div>
-          <div class="col-md-5">
+          <div class="col-md-6">
             <div class="card card-primary card-outline">
               <div class="card-header">
-                  <button class="btn btn-primary" data-toggle="modal" data-target="#add-modal"><i class="nav-icon fas fa-plus"></i> Tambah</button>
+                  <button class="btn btn-primary" data-toggle="modal" data-target="#add-modal-pengeluaran"><i class="nav-icon fas fa-plus"></i> Tambah</button>
               </div>
               <div class="card-body">
-                  <table class="table table-bordered table-striped" id="dataTable">
+                  <table class="table table-bordered table-striped" id="dataTablePengeluaran">
                       <thead>
                           <tr>
                           <th>No.</th>
@@ -124,18 +162,6 @@
               </div>
             </div>
         </div>
-          <div class="col-md-2">
-            <div class="small-box bg-info">
-                <div class="inner">
-                  <h3><%= totalPemasukan %> </h3>
-  
-                  <p>Jumlah Iuran Saat Ini</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-bag"></i>
-                </div>
-              </div>
-          </div>
         </div>
       <!-- /.row -->
     </div><!-- /.container-fluid -->

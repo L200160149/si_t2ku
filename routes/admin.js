@@ -53,7 +53,6 @@ router.post('/pemasukan', adminController.addPemasukan);
 router.put('/pemasukan', adminController.editPemasukan);
 router.delete('/pemasukan/:id', adminController.deletePemasukan);
 // route pengeluaran
-router.get('/pengeluaran', adminController.viewPengeluaran);
 router.post('/pengeluaran', adminController.addPengeluaran);
 router.put('/pengeluaran', adminController.editPengeluaran);
 router.delete('/pengeluaran/:id', adminController.deletePengeluaran);

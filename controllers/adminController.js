@@ -328,7 +328,6 @@ module.exports = {
                       "totalPengeluaran": '$pengeluaran'
                    }
              }]);
-             console.log(totalPengeluaran)
 
             // alert
             const alertMessage = req.flash('alertMessage');
@@ -343,7 +342,9 @@ module.exports = {
                 alert,
                 pemasukan,
                 pengeluaran,
-                totalPemasukan : rupiah(totalPemasukan[0].totalPemasukan)
+                totalPemasukan : rupiah(totalPemasukan[0].totalPemasukan),
+                totalPengeluaran : rupiah(totalPengeluaran[0].totalPengeluaran),
+                jumlahTotal : rupiah(totalPemasukan[0].totalPemasukan - totalPengeluaran[0].totalPengeluaran),
             })
         } catch (error) {
             console.log(error)
@@ -402,26 +403,6 @@ module.exports = {
             req.flash('alertMessage', `${error.message}`);
             req.flash('alertStatus', 'danger');
             res.redirect("/admin/pemasukan");
-        }
-    },
-    viewPengeluaran: async (req, res) => {
-        try {
-            const pengeluaran = await Pengeluaran.find();
-            // alert
-            const alertMessage = req.flash('alertMessage');
-            const alertStatus = req.flash('alertStatus');
-            const alert = { 
-                message: alertMessage, 
-                status: alertStatus,
-            };
-
-            res.render("admin/pengeluaran/view_pengeluaran", {
-                title: 'Data Pengeluaran | T2KU BMCK Jateng',
-                alert,
-                pengeluaran,
-            })
-        } catch (error) {
-            console.log(error)
         }
     },
     addPengeluaran: async (req, res) => {
