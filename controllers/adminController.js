@@ -18,7 +18,8 @@ module.exports = {
     viewDashboard: async (req, res) => {
         try {
             res.render("admin/dashboard/view_dashboard", {
-                title: 'Dashboard | T2KU BMCK Jateng'
+                title: 'Dashboard | T2KU BMCK Jateng',
+                page_name: 'dashboard'
             })
             console.log(Pegawai)
         } catch (error) {
