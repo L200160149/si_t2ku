@@ -16,10 +16,35 @@ const {rupiah} = require("../middlewares/formatRupiah")
 module.exports = {
     // dashboard
     viewDashboard: async (req, res) => {
+        const totalPegawai = await Pegawai.find().count();
+        const totalPemasukan = await Pemasukan.aggregate([{
+            $group: {
+               _id: '',
+               "pemasukan": { $sum: '$jumlah_iuran' }
+            }
+            }, {
+               $project: {
+                  _id: 0,
+                  "totalPemasukan": '$pemasukan'
+               }
+         }]);
+
+        const totalPengeluaran = await Pengeluaran.aggregate([{
+            $group: {
+               _id: '',
+               "pengeluaran": { $sum: '$jumlah_pengeluaran' }
+            }
+            }, {
+               $project: {
+                  _id: 0,
+                  "totalPengeluaran": '$pengeluaran'
+               }
+         }]);
         try {
             res.render("admin/dashboard/view_dashboard", {
                 title: 'Dashboard | T2KU BMCK Jateng',
-                page_name: 'dashboard'
+                totalPegawai,
+                jumlahTotal : rupiah(totalPemasukan[0].totalPemasukan - totalPengeluaran[0].totalPengeluaran),
             })
             console.log(Pegawai)
         } catch (error) {
