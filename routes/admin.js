@@ -3,6 +3,7 @@ const adminController = require('../controllers/adminController');
 // const { upload, uploadMultiple } = require('../middlewares/multer');
 const multer  = require('multer')
 const path = require('path')
+const auth = require('../middlewares/auth');
 
 // upload file
 var storage = multer.diskStorage({
@@ -30,6 +31,10 @@ var uploadGaji = upload.fields([
     { name: 'file' },
 ])
 
+// semua router dibawah auth harus login terlebih dahulu
+router.use(auth);
+
+router.get('/logout', adminController.authLogout);
 // route dashboard
 router.get('/dashboard', adminController.viewDashboard);
 // route pegawai

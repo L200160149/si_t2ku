@@ -7,6 +7,7 @@ let pdf = require("html-pdf");
 let ejs = require("ejs");
 const fs = require('fs-extra');
 const path = require('path');
+const bcrypt = require('bcryptjs');
 
 const { check  } = require('express-validator');
 const Pemasukan = require("../models/Pemasukan");
@@ -25,14 +26,50 @@ module.exports = {
                 message: alertMessage, 
                 status: alertStatus,
             };
-            res.render("login/view_login", {
-                title: 'Halaman Login | T2KU BMCK Jateng',
-                alert
-            })
+            
+            if (req.session.user == null || req.session.user == undefined) {
+                res.render("login/view_login", {
+                    title: 'Halaman Login | T2KU BMCK Jateng',
+                    alert
+                    });
+            } else {
+                res.redirect("/admin/dashboard");
+            }
         } catch (error) {
-            console.log(error)
+            res.redirect("/admin/signin");
         }
     },
+    authSignin: async (req, res) => {
+        try {
+          const { username, password } = req.body;
+          const user = await Users.findOne({ username: username });
+          if (!user) {
+            req.flash('alertMessage', 'User tidak ada');
+            req.flash('alertStatus', 'danger');
+            res.redirect("/auth");
+          }
+          const isPasswordMatch = await bcrypt.compare(password, user.password);
+          if (!isPasswordMatch) {
+            req.flash('alertMessage', 'Password salah');
+            req.flash('alertStatus', 'danger');
+            res.redirect("/auth");
+          }
+          
+          req.session.user = {
+            id: user.id,
+            username: user.username,
+            level: user.level
+          }
+    
+          res.redirect('/admin/dashboard');
+        } catch (error) {
+    
+        }
+      },
+      authLogout: async (req, res) => {
+        req.session.destroy();
+        res.redirect('/auth')
+      },
     // end login
     // dashboard
     viewDashboard: async (req, res) => {

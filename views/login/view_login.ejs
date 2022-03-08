@@ -2,7 +2,7 @@
 <!doctype html>
 <html lang="id">
   <head>
-  	<title>Login 05</title>
+  	<title>SI T2KU DPU BMCK Jateng</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -27,6 +27,7 @@
 					<div class="wrap">
 						<div class="img" style="background-image: url(/public/login-frontend/images/bg-1.jpg);"></div>
 						<div class="login-wrap p-4 p-md-5">
+							<%- include('../partials/message.ejs') %>
 			      	<div class="d-flex">
 			      		<div class="w-100">
 			      			<h3 class="mb-4">Form Login</h3>
@@ -34,17 +35,17 @@
 			      	</div>
 					<form action="/auth" class="signin-form" method="POST">
 			      		<div class="form-group mt-3">
-			      			<input type="text" class="form-control" required>
-			      			<label class="form-control-placeholder" for="username" name="username">Username</label>
+			      			<input type="text" class="form-control" name="username" required>
+							  <label class="form-control-placeholder" for="username" >Username</label>
 			      		</div>
-		            <div class="form-group">
-		              <input id="password-field" type="password" class="form-control" required>
-		              <label class="form-control-placeholder" for="password" name="password">Password</label>
-		              <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
-		            </div>
-		            <div class="form-group">
-		            	<button type="submit" class="form-control btn btn-primary rounded submit px-3">Login</button>
-		            </div>
+						<div class="form-group">
+							<input id="password-field" type="password" class="form-control" name="password" required>
+						<label class="form-control-placeholder" for="password" >Password</label>
+							<span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+						</div>
+						<div class="form-group">
+							<button type="submit" class="form-control btn btn-primary rounded submit px-3">Login</button>
+						</div>
 		          </form>
 		        </div>
 		      </div>
