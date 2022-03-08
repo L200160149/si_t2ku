@@ -1,6 +1,7 @@
 const Pegawai = require("../models/Pegawai")
 const Gaji = require("../models/Gaji")
 const Jabatan = require("../models/Jabatan");
+const Users = require("../models/Users");
 
 let pdf = require("html-pdf");
 let ejs = require("ejs");
@@ -15,23 +16,23 @@ const {rupiah} = require("../middlewares/formatRupiah")
 
 module.exports = {
     // login
-        viewLogin: async (req, res) => {
-            try {
-                // alert
-                const alertMessage = req.flash('alertMessage');
-                const alertStatus = req.flash('alertStatus');
-                const alert = { 
-                    message: alertMessage, 
-                    status: alertStatus,
-                };
-                res.render("login/view_login", {
-                    title: 'Halaman Login | T2KU BMCK Jateng',
-                    alert
-                })
-            } catch (error) {
-                console.log(error)
-            }
-        },
+    viewLogin: async (req, res) => {
+        try {
+            // alert
+            const alertMessage = req.flash('alertMessage');
+            const alertStatus = req.flash('alertStatus');
+            const alert = { 
+                message: alertMessage, 
+                status: alertStatus,
+            };
+            res.render("login/view_login", {
+                title: 'Halaman Login | T2KU BMCK Jateng',
+                alert
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    },
     // end login
     // dashboard
     viewDashboard: async (req, res) => {
@@ -502,6 +503,75 @@ module.exports = {
             req.flash('alertMessage', `${error.message}`);
             req.flash('alertStatus', 'danger');
             res.redirect("/admin/pemasukan");
+        }
+    },
+    viewPengguna: async (req, res) => {
+        try {
+            const users = await Users.find();
+            
+            // alert
+            const alertMessage = req.flash('alertMessage');
+            const alertStatus = req.flash('alertStatus');
+            const alert = { 
+                message: alertMessage, 
+                status: alertStatus,
+            };
+
+            res.render("admin/pengguna/view_pengguna", {
+                title: 'Data Pengguna | T2KU BMCK Jateng',
+                alert,
+                users,
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    },
+    addPengguna: async (req, res) => {
+        try {
+            const { username, password, level} = req.body;
+            await Users.create({ 
+                username,
+                password, 
+                level,
+            });
+            req.flash('alertMessage', 'Berhasil menambahkan data Pengguna');
+            req.flash('alertStatus', 'success');
+            res.redirect("/admin/pengguna");
+        } catch (error) {
+            req.flash('alertMessage', `${error.message}`);
+            req.flash('alertStatus', 'danger');
+            res.redirect("/admin/pengguna");
+        }
+    },
+    editPengguna: async (req, res) => {
+        try {
+            const { id, username, password, level} = req.body;
+            const users = await Users.findOne({_id: id});
+                users.username = username;
+                users.password = password;
+                users.level = level;
+                await users.save();
+                req.flash('alertMessage', 'Berhasil mengubah data Pengguna');
+                req.flash('alertStatus', 'success');
+                res.redirect("/admin/pengguna");
+        } catch (error) {
+            req.flash('alertMessage', `${error.message}`);
+            req.flash('alertStatus', 'danger');
+            res.redirect("/admin/pengguna");
+        }
+    },
+    deletePengguna: async (req, res) => {
+        try {
+            const { id } = req.params;
+            const users = await Users.findOne({_id: id});
+            await users.remove();
+            req.flash('alertMessage', 'Berhasil menghapus data Pengguna');
+            req.flash('alertStatus', 'success');
+            res.redirect("/admin/pengguna");
+        } catch (error) {
+            req.flash('alertMessage', `${error.message}`);
+            req.flash('alertStatus', 'danger');
+            res.redirect("/admin/pengguna");
         }
     },
 }

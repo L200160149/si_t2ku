@@ -1,0 +1,68 @@
+<!-- Main content -->
+<div class="content">
+    <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-8">
+              <div class="card card-primary card-outline">
+                <div class="card-header">
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#add-modal"><i class="nav-icon fas fa-plus"></i> Tambah</button>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered table-striped" id="dataTable">
+                        <thead>
+                        <tr>
+                          <th>No.</th>
+                          <th>Username</th>
+                          <th>Level</th>
+                          <th>Aksi</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                          <% for (let i = 0; i < users.length; i++) { %> 
+                        <tr>
+                          <td><%= i + 1 %></td>
+                          <td><%= users[i].username %></td>
+                          <td><%= users[i].level %></td>
+                          <td>
+                              <a href="javascript:void()" type="button" class="btn btn-info button-update"
+                                data-id="<%= users[i].id %>"
+                                data-username="<%= users[i].username %>"
+                                data-level="<%= users[i].level %>"
+                              ><i class="nav-icon fas fa-pencil-alt"></i> </a>
+                              <button class="btn btn-danger" data-toggle="modal" data-target="#delete_modal<%= users[i].id %>"><i class="nav-icon fas fa-trash"></i> </button>
+                            
+                              <!-- Modal Hapus -->
+                              <div class="modal fade" id="delete_modal<%= users[i].id %>" tabindex="-1" role="dialog" aria-labelledby="delete_modalTitle" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="delete_modalTitle">Hapus Data Pengguna ?</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                      Data yang sudah di hapus tidak dapat dikembalikan lagi.
+                                    </div>
+                                    <div class="modal-footer">
+                                    <form action="/admin/pengguna/<%= users[i].id %>?_method=DELETE" method="POST">
+                                      <button type="submit" class="btn btn-danger">Hapus</button>
+                                    </form>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                          </td>
+                        </tr>
+                        <% } %> 
+                        </tbody>
+                    </table>
+                </div>
+              </div>
+          </div>
+        </div>
+      <!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content -->

@@ -1,0 +1,53 @@
+<%- include('../../partials/header.ejs') %> 
+<%- include('../../partials/navbar.ejs') %> 
+<%- include('../../partials/sidebar.ejs') %> 
+<!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+
+        
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Data Pengguna</h1>
+          </div><!-- /.col -->
+
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <!-- <li class="breadcrumb-item"><a href="#">Home</a></li> -->
+              <li class="breadcrumb-item active">Data Pengguna</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+
+        <%- include('../../partials/message.ejs') %> 
+
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <%- include('table_pengguna.ejs') %> 
+    
+  </div>
+  <!-- /.content-wrapper -->
+  
+  <!-- Modal -->
+  <%- include('add_modal.ejs') %>
+  <%- include('edit_modal.ejs') %>
+
+  <%- include('../../partials/footer.ejs') %> 
+  <%- include('../../partials/js.ejs') %> 
+
+  <script>
+    $('#dataTable').on('click', '.button-update', function() {
+      let id = $(this).data('id');
+      let username = $(this).data('username');
+      let level = $(this).data('level');
+
+      $('#edit-modal').modal('show');
+      $('.id').val(id);
+      $('.username').val(username);
+      $('.level').val(level);
+    })
+  </script>

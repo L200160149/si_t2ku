@@ -55,5 +55,10 @@ router.delete('/pemasukan/:id', adminController.deletePemasukan);
 router.post('/pengeluaran', adminController.addPengeluaran);
 router.put('/pengeluaran', adminController.editPengeluaran);
 router.delete('/pengeluaran/:id', adminController.deletePengeluaran);
+// route pengguna
+router.get('/pengguna', adminController.viewPengguna);
+router.post('/pengguna', adminController.addPengguna);
+router.put('/pengguna', adminController.editPengguna);
+router.delete('/pengguna/:id', adminController.deletePengguna);
 
 module.exports = router;
