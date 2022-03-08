@@ -47,7 +47,7 @@ app.use(
   express.static(path.join(__dirname, "node_modules/admin-lte"))
 );
 
-// app.use('/', indexRouter);
+app.use('/', indexRouter);
 app.use('/users', usersRouter);
 // admin
 app.use('/admin', adminRouter);

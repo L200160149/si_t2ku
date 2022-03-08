@@ -30,11 +30,6 @@ var uploadGaji = upload.fields([
     { name: 'file' },
 ])
 
-
-// route login
-router.get('/login', (req, res) => {
-  console.log('hello world')
-});
 // route dashboard
 router.get('/dashboard', adminController.viewDashboard);
 // route pegawai
