@@ -11,16 +11,12 @@
         <form action="/admin/pengguna" method="POST">
         <div class="modal-body">
             <div class="form-group">
-                <label for="username">Username <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" name="username" id="username" placeholder="Masukkan Username..." required>
+                <label for="level">Level</label>
+                <input type="text" value="admin" class="form-control" id="level" readonly>
             </div>
             <div class="form-group">
-                <label for="level">Pilih Level <span class="text-danger">*</span></label>
-                <select name="level" id="level" class="form-control" required>
-                    <option value="">-- Pilih Level --</option>
-                    <option value="admin">Admin</option>
-                    <option value="pegawai">Pegawai</option>
-                </select>
+                <label for="username">Username <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" name="username" id="username" placeholder="Masukkan Username..." required>
             </div>
             <div class="form-group">
                 <label for="password">Password <span class="text-danger">*</span></label>

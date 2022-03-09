@@ -565,11 +565,11 @@ module.exports = {
     },
     addPengguna: async (req, res) => {
         try {
-            const { username, password, level} = req.body;
+            const { username, password} = req.body;
             await Users.create({ 
                 username,
                 password, 
-                level,
+                level: 'admin'
             });
             req.flash('alertMessage', 'Berhasil menambahkan data Pengguna');
             req.flash('alertStatus', 'success');
@@ -586,7 +586,7 @@ module.exports = {
             const users = await Users.findOne({_id: id});
                 users.username = username;
                 users.password = password;
-                users.level = level;
+                users.level = 'admin';
                 await users.save();
                 req.flash('alertMessage', 'Berhasil mengubah data Pengguna');
                 req.flash('alertStatus', 'success');

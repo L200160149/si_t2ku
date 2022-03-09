@@ -2,7 +2,7 @@
 <div class="content">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-12">
           <div class="small-box bg-info">
               <div class="inner">
                 <h3><%= jumlahTotal %> </h3>
@@ -14,7 +14,7 @@
               </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
           <div class="small-box bg-secondary">
               <div class="inner">
                 <h3><%= totalPemasukan %> </h3>
@@ -26,7 +26,7 @@
               </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
           <div class="small-box bg-danger">
               <div class="inner">
                 <h3><%= totalPengeluaran %> </h3>
@@ -41,14 +41,15 @@
       </div>
       <div class="row">
           <div class="col-md-6">
-              <div class="card card-primary card-outline">
+              <div class="card card-secondary card-outline">
                 <div class="card-header">
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#add-modal"><i class="nav-icon fas fa-plus"></i> Tambah</button>
+                  <h5 class="m-0">Tabel Pemasukan</h5>
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered table-striped" id="dataTable">
-                        <thead>
-                        <tr>
+                  <button class="btn btn-primary" data-toggle="modal" data-target="#add-modal"><i class="nav-icon fas fa-plus"></i> Tambah</button>
+                  <table class="table table-bordered table-striped" id="dataTable">
+                    <thead>
+                      <tr>
                           <th>No.</th>
                           <th>Iuran</th>
                           <th>Tanggal</th>
@@ -102,11 +103,12 @@
               </div>
           </div>
           <div class="col-md-6">
-            <div class="card card-primary card-outline">
+            <div class="card card-danger card-outline">
               <div class="card-header">
-                  <button class="btn btn-primary" data-toggle="modal" data-target="#add-modal-pengeluaran"><i class="nav-icon fas fa-plus"></i> Tambah</button>
+                <h5 class="m-0">Tabel Pengeluaran</h5>
               </div>
               <div class="card-body">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#add-modal-pengeluaran"><i class="nav-icon fas fa-plus"></i> Tambah</button>
                   <table class="table table-bordered table-striped" id="dataTablePengeluaran">
                       <thead>
                           <tr>
