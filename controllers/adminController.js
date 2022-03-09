@@ -2,6 +2,7 @@ const Pegawai = require("../models/Pegawai")
 const Gaji = require("../models/Gaji")
 const Jabatan = require("../models/Jabatan");
 const Users = require("../models/Users");
+const Sk = require("../models/SK");
 
 let pdf = require("html-pdf");
 let ejs = require("ejs");
@@ -13,7 +14,7 @@ const { check  } = require('express-validator');
 const Pemasukan = require("../models/Pemasukan");
 const Pengeluaran = require("../models/Pengeluaran");
 
-const {rupiah} = require("../middlewares/formatRupiah")
+const {rupiah} = require("../middlewares/formatRupiah");
 
 module.exports = {
     // login
@@ -115,7 +116,6 @@ module.exports = {
             const pegawai = await Pegawai.find()
             .populate({ path: 'jabatanId'})
             const jabatan = await Jabatan.find();
-            console.log(pegawai)
             // alert
             const alertMessage = req.flash('alertMessage');
             const alertStatus = req.flash('alertStatus');
@@ -354,7 +354,6 @@ module.exports = {
             const { id } = req.body;
             const pegawai = await Pegawai.findOne({_id: id})
             .populate({ path: 'jabatanId'})
-            console.log(pegawai)
             ejs.renderFile(path.join('./views/', "report.ejs"), {pegawai}, (err, data) => {
                 if (err) {
                       res.send(err);
@@ -542,6 +541,80 @@ module.exports = {
             res.redirect("/admin/pemasukan");
         }
     },
+
+    viewSk: async (req, res) => {
+        try {
+            const sk = await Sk.find();
+            const pegawai = await Pegawai.find();
+            // alert
+            const alertMessage = req.flash('alertMessage');
+            const alertStatus = req.flash('alertStatus');
+            const alert = { 
+                message: alertMessage, 
+                status: alertStatus,
+            };
+
+            res.render("admin/sk/view_sk", {
+                title: 'Data SK | T2KU BMCK Jateng',
+                alert,
+                sk,
+                pegawai
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    },
+    addSk: async (req, res) => {
+        try {
+            const { pegawaiId, tanggal} = req.body;
+            await Sk.create({ 
+                pegawaiId,
+                tanggal,
+                file_Sk: `uploads/${req.files.file_Sk[0].filename}`,
+            });
+            console.log(file_Sk)
+            req.flash('alertMessage', 'Berhasil menambahkan data SK');
+            req.flash('alertStatus', 'success');
+            res.redirect("/admin/sk");
+        } catch (error) {
+            req.flash('alertMessage', `${error.message}`);
+            req.flash('alertStatus', 'danger');
+            res.redirect("/admin/sk");
+        }
+    },
+    editSk: async (req, res) => {
+        try {
+            const { id, pegawaiId, tanggal, file_Sk} = req.body;
+            const sk = await Sk.findOne({_id: id});
+                sk.pegawaiId = pegawaiId;
+                sk.tanggal = tanggal;
+                sk.file_Sk = file_Sk;
+                await sk.save();
+                req.flash('alertMessage', 'Berhasil mengubah data SK');
+                req.flash('alertStatus', 'success');
+                res.redirect("/admin/sk");
+        } catch (error) {
+            req.flash('alertMessage', `${error.message}`);
+            req.flash('alertStatus', 'danger');
+            res.redirect("/admin/sk");
+        }
+    },
+    deleteSk: async (req, res) => {
+        try {
+            const { id } = req.params;
+            const sk = await Sk.findOne({_id: id});
+                // await fs.unlink(path.join(`public/${pemasukan.file_SK}`));
+            await sk.remove();
+            req.flash('alertMessage', 'Berhasil menghapus data SK');
+            req.flash('alertStatus', 'success');
+            res.redirect("/admin/sk");
+        } catch (error) {
+            req.flash('alertMessage', `${error.message}`);
+            req.flash('alertStatus', 'danger');
+            res.redirect("/admin/sk");
+        }
+    },
+
     viewPengguna: async (req, res) => {
         try {
             const users = await Users.find();

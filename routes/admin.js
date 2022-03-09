@@ -27,12 +27,12 @@ var uploadPegawai = upload.fields([
     { name: 'foto_bpjs_ket' },
 ])
 
-var uploadGaji = upload.fields([
-    { name: 'file' },
+var uploadSk = upload.fields([
+  { name: 'file_Sk' },
 ])
 
 // semua router dibawah auth harus login terlebih dahulu
-router.use(auth);
+// router.use(auth);
 
 router.get('/logout', adminController.authLogout);
 // route dashboard
@@ -60,6 +60,11 @@ router.delete('/pemasukan/:id', adminController.deletePemasukan);
 router.post('/pengeluaran', adminController.addPengeluaran);
 router.put('/pengeluaran', adminController.editPengeluaran);
 router.delete('/pengeluaran/:id', adminController.deletePengeluaran);
+// route sk
+router.get('/sk', adminController.viewSk);
+router.post('/sk', uploadSk, adminController.addSk);
+router.put('/sk', uploadSk, adminController.editSk);
+router.delete('/sk/:id', adminController.deleteSk);
 // route pengguna
 router.get('/pengguna', adminController.viewPengguna);
 router.post('/pengguna', adminController.addPengguna);
