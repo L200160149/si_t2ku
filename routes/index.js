@@ -1,9 +1,6 @@
 const router = require('express').Router();
 const adminController = require('../controllers/adminController');
-var bodyParser = require('body-parser')
 
-router.use(bodyParser.urlencoded({ extended: true }))
-router.use(bodyParser.json())
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.redirect('/auth')
