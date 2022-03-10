@@ -65,12 +65,12 @@
                           <td><%= pemasukan[i].tanggal.getDate()%> - <%= pemasukan[i].tanggal.getMonth() + 1 %> - <%= pemasukan[i].tanggal.getFullYear() %></td>
                           <td><%= pemasukan[i].keterangan %></td>
                           <td>
-                              <a href="javascript:void()" type="button" class="btn btn-info button-update"
+                              <a href="javascript:void()" type="button" class="btn btn-info button-update m-1"
                                 data-id="<%= pemasukan[i].id %>"
                                 data-jumlah_iuran="<%= pemasukan[i].jumlah_iuran %>"
                                 data-keterangan="<%= pemasukan[i].keterangan %>"
                               ><i class="nav-icon fas fa-pencil-alt"></i> </a>
-                              <button class="btn btn-danger" data-toggle="modal" data-target="#delete_modal<%= pemasukan[i].id %>"><i class="nav-icon fas fa-trash"></i> </button>
+                              <button class="btn btn-danger m-1" data-toggle="modal" data-target="#delete_modal<%= pemasukan[i].id %>"><i class="nav-icon fas fa-trash"></i> </button>
                             
                               <!-- Modal Hapus -->
                               <div class="modal fade" id="delete_modal<%= pemasukan[i].id %>" tabindex="-1" role="dialog" aria-labelledby="delete_modalTitle" aria-hidden="true">
@@ -127,12 +127,12 @@
                         <td><%= pengeluaran[i].tanggal.getDate()%> - <%= pengeluaran[i].tanggal.getMonth() + 1 %> - <%= pengeluaran[i].tanggal.getFullYear() %></td>
                         <td><%= pengeluaran[i].keterangan %></td>
                         <td>
-                            <a href="javascript:void()" type="button" class="btn btn-info button-update"
+                            <a href="javascript:void()" type="button" class="btn btn-info button-update m-1"
                               data-id="<%= pengeluaran[i].id %>"
                               data-jumlah_pengeluaran="<%= pengeluaran[i].jumlah_pengeluaran %>"
                               data-keterangan="<%= pengeluaran[i].keterangan %>"
                             ><i class="nav-icon fas fa-pencil-alt"></i> </a>
-                            <button class="btn btn-danger" data-toggle="modal" data-target="#delete_modal<%= pengeluaran[i].id %>"><i class="nav-icon fas fa-trash"></i> </button>
+                            <button class="btn btn-danger m-1" data-toggle="modal" data-target="#delete_modal<%= pengeluaran[i].id %>"><i class="nav-icon fas fa-trash"></i> </button>
                           
                             <!-- Modal Hapus -->
                             <div class="modal fade" id="delete_modal<%= pengeluaran[i].id %>" tabindex="-1" role="dialog" aria-labelledby="delete_modalTitle" aria-hidden="true">

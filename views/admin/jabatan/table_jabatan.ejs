@@ -26,13 +26,13 @@
                           <td><%= jabatan[i].pendidikan %></td>
                           <td>Rp. <%= jabatan[i].gaji %></td>
                           <td>
-                              <a href="javascript:void()" type="button" class="btn btn-info button-update"
+                              <a href="javascript:void()" type="button" class="btn btn-info button-update m-1"
                                 data-id="<%= jabatan[i].id %>"
                                 data-jabatan="<%= jabatan[i].jabatan %>"
                                 data-pendidikan="<%= jabatan[i].pendidikan %>"
                                 data-gaji="<%= jabatan[i].gaji %>"
                               ><i class="nav-icon fas fa-pencil-alt"></i> </a>
-                              <button class="btn btn-danger" data-toggle="modal" data-target="#delete_modal<%= jabatan[i].id %>"><i class="nav-icon fas fa-trash"></i> </button>
+                              <button class="btn btn-danger m-1" data-toggle="modal" data-target="#delete_modal<%= jabatan[i].id %>"><i class="nav-icon fas fa-trash"></i> </button>
                             
                               <!-- Modal Hapus -->
                               <div class="modal fade" id="delete_modal<%= jabatan[i].id %>" tabindex="-1" role="dialog" aria-labelledby="delete_modalTitle" aria-hidden="true">

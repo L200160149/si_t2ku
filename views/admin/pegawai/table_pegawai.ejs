@@ -26,7 +26,7 @@
                           <td><%= pegawai[i].unker %></td>
                           <td><%= pegawai[i].jabatanId.jabatan %>, <%= pegawai[i].jabatanId.pendidikan %></td>
                           <td>
-                              <a href="javascript:void()" type="button" class="btn btn-info button-update"
+                              <a href="javascript:void()" type="button" class="btn btn-info button-update m-1"
                                 data-id="<%= pegawai[i].id %>"
                                 data-nama="<%= pegawai[i].nama %>"
                                 data-unker="<%= pegawai[i].unker %>"
@@ -39,8 +39,8 @@
                                 data-tanggal_masuk="<%= pegawai[i].tanggal_masuk %>"
                                 data-jabatanId="<%= pegawai[i].jabatanId %>"
                               ><i class="nav-icon fas fa-pencil-alt"></i> </a>
-                              <button class="btn btn-secondary" data-toggle="modal" data-target="#detail_modal<%= pegawai[i].id %>"><i class="nav-icon fas fa-eye"></i> </button>
-                              <button class="btn btn-danger" data-toggle="modal" data-target="#delete_modal<%= pegawai[i].id %>"><i class="nav-icon fas fa-trash"></i> </button>
+                              <button class="btn btn-secondary m-1" data-toggle="modal" data-target="#detail_modal<%= pegawai[i].id %>"><i class="nav-icon fas fa-eye"></i> </button>
+                              <button class="btn btn-danger m-1" data-toggle="modal" data-target="#delete_modal<%= pegawai[i].id %>"><i class="nav-icon fas fa-trash"></i> </button>
                             
                               <!-- Modal Hapus -->
                               <div class="modal fade" id="delete_modal<%= pegawai[i].id %>" tabindex="-1" role="dialog" aria-labelledby="delete_modalTitle" aria-hidden="true">

@@ -3,6 +3,7 @@ const Gaji = require("../models/Gaji")
 const Jabatan = require("../models/Jabatan");
 const Users = require("../models/Users");
 const Sk = require("../models/SK");
+const Slipgaji = require("../models/Slipgaji");
 
 let pdf = require("html-pdf");
 let ejs = require("ejs");
@@ -321,7 +322,8 @@ module.exports = {
     viewGaji: async (req, res) => {
         const gaji = await Gaji.find();
         const pegawai = await Pegawai.find()
-            .populate({ path: 'jabatanId'})
+            .populate({ path: 'jabatanId'});
+        const slipGaji = await Slipgaji.find();
         // alert
         const alertMessage = req.flash('alertMessage');
         const alertStatus = req.flash('alertStatus');
@@ -334,30 +336,62 @@ module.exports = {
                 title: 'Data Gaji | T2KU BMCK Jateng',
                 alert,
                 gaji,
-                pegawai
+                pegawai,
+                slipGaji
             })
         } catch (error) {
             console.log(error)
         }
     },
-    // addGaji: async (req, res) => {
-    //     try {
-    //         const { pegawaiId, tanggal, status } = req.body;
-    //         await Gaji.create({ 
-    //             tanggal,
-    //             status,
-    //             pegawaiId,
-    //             file: `uploads/${req.files.file[0].filename}`,
-    //         });
-    //         req.flash('alertMessage', 'Berhasil menambahkan data Gaji');
-    //         req.flash('alertStatus', 'success');
-    //         res.redirect("/admin/gaji");
-    //     } catch (error) {
-    //         req.flash('alertMessage', `${error.message}`);
-    //         req.flash('alertStatus', 'danger');
-    //         res.redirect("/admin/gaji");
-    //     }
-    // },
+    addSlipGaji: async (req, res) => {
+        try {
+            const { tanggal } = req.body;
+            await Slipgaji.create({ 
+                tanggal,
+                slip_gaji: `uploads/${req.files.slip_gaji[0].filename}`,
+            });
+            req.flash('alertMessage', 'Berhasil menambahkan data Slip Gaji');
+            req.flash('alertStatus', 'success');
+            res.redirect("/admin/gaji");
+        } catch (error) {
+            req.flash('alertMessage', `${error.message}`);
+            req.flash('alertStatus', 'danger');
+            res.redirect("/admin/gaji");
+        }
+    },
+    editSlipGaji: async (req, res) => {
+        try {
+            const { id, tanggal} = req.body;
+            const slipGaji = await Slipgaji.findOne({_id: id});
+                slipGaji.tanggal = tanggal;
+                slipGaji.slip_gaji = `uploads/${req.files.slip_gaji[0].filename}`,
+                await slipGaji.save();
+                req.flash('alertMessage', 'Berhasil mengubah data Slip Gaji');
+                req.flash('alertStatus', 'success');
+                res.redirect("/admin/gaji");
+        } catch (error) {
+            req.flash('alertMessage', `${error.message}`);
+            req.flash('alertStatus', 'danger');
+            res.redirect("/admin/gaji");
+        }
+    },
+    deleteSlipGaji: async (req, res) => {
+        try {
+            const { id } = req.params;
+            const sk = await Slipgaji.findOne({_id: id});
+            if(sk.slip_gaji) {
+                await fs.unlink(path.join(`public/${sk.slip_gaji}`));
+            }
+            await sk.remove();
+            req.flash('alertMessage', 'Berhasil menghapus Slip Gaji');
+            req.flash('alertStatus', 'success');
+            res.redirect("/admin/gaji");
+        } catch (error) {
+            req.flash('alertMessage', `${error.message}`);
+            req.flash('alertStatus', 'danger');
+            res.redirect("/admin/gaji");
+        }
+    },
     cetakGaji: async (req, res) => {
         try {
             const { id } = req.body;

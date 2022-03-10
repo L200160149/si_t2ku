@@ -33,32 +33,21 @@
   <!-- /.content-wrapper -->
   
   <!-- Modal -->
-  <%- include('cetak_modal.ejs') %>
+  <%- include('add_modal.ejs') %>
+  <%- include('edit_modal.ejs') %>
 
   <%- include('../../partials/footer.ejs') %> 
   <%- include('../../partials/js.ejs') %> 
 
-  <!-- <script>
-    $('#dataTable').on('click', '.button-update', function() {
+  <script>
+    $('#dataTable2').on('click', '.button-update', function() {
       let id = $(this).data('id');
-      let nama = $(this).data('nama');
-      let unker = $(this).data('unker');
-      let nik = $(this).data('nik');
-      let npwp = $(this).data('npwp');
-      let no_rek_jateng = $(this).data('no_rek_jateng');
-      let no_rek_bni = $(this).data('no_rek_bni');
-      let no_bpjs_kes = $(this).data('no_bpjs_kes');
-      let no_bpjs_ket = $(this).data('no_bpjs_ket');
+      let tanggal = $(this).data('tanggal');
+      let slip_gaji = $(this).data('slip_gaji');
 
       $('#edit-modal').modal('show');
       $('.id').val(id);
-      $('.nama').val(nama);
-      $('.unker').val(unker);
-      $('.nik').val(nik);
-      $('.npwp').val(npwp);
-      $('.no_rek_jateng').val(no_rek_jateng);
-      $('.no_rek_bni').val(no_rek_bni);
-      $('.no_bpjs_kes').val(no_bpjs_kes);
-      $('.no_bpjs_ket').val(no_bpjs_ket);
+      $('.tanggal').val(tanggal);
+      $('.slip_gaji').val(slip_gaji);
     })
-  </script> -->
+  </script>

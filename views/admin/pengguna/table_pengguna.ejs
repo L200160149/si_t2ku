@@ -24,12 +24,12 @@
                           <td><%= users[i].username %></td>
                           <td><%= users[i].level %></td>
                           <td>
-                              <a href="javascript:void()" type="button" class="btn btn-info button-update"
+                              <a href="javascript:void()" type="button" class="btn btn-info button-update m-1"
                                 data-id="<%= users[i].id %>"
                                 data-username="<%= users[i].username %>"
                                 data-level="<%= users[i].level %>"
                               ><i class="nav-icon fas fa-pencil-alt"></i> </a>
-                              <button class="btn btn-danger" data-toggle="modal" data-target="#delete_modal<%= users[i].id %>"><i class="nav-icon fas fa-trash"></i> </button>
+                              <button class="btn btn-danger m-1" data-toggle="modal" data-target="#delete_modal<%= users[i].id %>"><i class="nav-icon fas fa-trash"></i> </button>
                             
                               <!-- Modal Hapus -->
                               <div class="modal fade" id="delete_modal<%= users[i].id %>" tabindex="-1" role="dialog" aria-labelledby="delete_modalTitle" aria-hidden="true">

@@ -26,13 +26,13 @@
                           <td><%= sk[i].tanggal.getDate() %>- <%= sk[i].tanggal.getMonth() + 1 %> - <%= sk[i].tanggal.getFullYear() %></td>
                           <td><img width="150" src="http://localhost:3000/public/<%= sk[i].file_Sk %>" alt=""></td>
                           <td>
-                              <a href="javascript:void()" type="button" class="btn btn-info"
+                              <a href="javascript:void()" type="button" class="btn btn-info m-1"
                                 data-id="<%= sk[i].id %>"
                                 data-pegawaiId="<%= sk[i].pegawaiId.id %>"
                                 data-tanggal="<%= sk[i].tanggal %>"
                                 data-fileSk="<%= sk[i].file_Sk %>" data-toggle="modal" data-target="#edit_modal<%= sk[i].id %>"
                               ><i class="nav-icon fas fa-pencil-alt"></i> </a>
-                              <button class="btn btn-danger" data-toggle="modal" data-target="#delete_modal<%= sk[i].id %>"><i class="nav-icon fas fa-trash"></i> </button>
+                              <button class="btn btn-danger m-1" data-toggle="modal" data-target="#delete_modal<%= sk[i].id %>"><i class="nav-icon fas fa-trash"></i> </button>
                             
                               <!-- Modal Hapus -->
                               <div class="modal fade" id="delete_modal<%= sk[i].id %>" tabindex="-1" role="dialog" aria-labelledby="delete_modalTitle" aria-hidden="true">

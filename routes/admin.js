@@ -31,6 +31,10 @@ var uploadSk = upload.fields([
   { name: 'file_Sk' },
 ])
 
+var uploadGaji = upload.fields([
+  { name: 'slip_gaji' },
+])
+
 // semua router dibawah auth harus login terlebih dahulu
 // router.use(auth);
 
@@ -51,6 +55,9 @@ router.delete('/jabatan/:id', adminController.deleteJabatan);
 router.get('/cetakgaji', adminController.cetakGaji);
 // route gaji
 router.get('/gaji', adminController.viewGaji);
+router.post('/gaji', uploadGaji, adminController.addSlipGaji);
+router.put('/gaji', uploadGaji, adminController.editSlipGaji);
+router.delete('/gaji/:id', adminController.deleteSlipGaji);
 // route pemasukan
 router.get('/pemasukan', adminController.viewPemasukan);
 router.post('/pemasukan', adminController.addPemasukan);
