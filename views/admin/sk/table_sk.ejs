@@ -2,7 +2,7 @@
 <div class="content">
     <div class="container-fluid">
       <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-8">
               <div class="card card-primary card-outline">
                 <div class="card-header">
                     <button class="btn btn-primary" data-toggle="modal" data-target="#add-modal"><i class="nav-icon fas fa-plus"></i> Tambah</button>
@@ -22,15 +22,15 @@
                           <% for (let i = 0; i < sk.length; i++) { %> 
                         <tr>
                           <td><%= i + 1 %></td>
-                          <td><%= sk[i].pegawaiId %></td>
-                          <td><%= sk[i].tanggal %></td>
-                          <td><%= sk[i].file_Sk %></td>
+                          <td><%= sk[i].pegawaiId.nama %></td>
+                          <td><%= sk[i].tanggal.getDate() %>- <%= sk[i].tanggal.getMonth() + 1 %> - <%= sk[i].tanggal.getFullYear() %></td>
+                          <td><img width="150" src="http://localhost:3000/public/<%= sk[i].file_Sk %>" alt=""></td>
                           <td>
-                              <a href="javascript:void()" type="button" class="btn btn-info button-update"
+                              <a href="javascript:void()" type="button" class="btn btn-info"
                                 data-id="<%= sk[i].id %>"
-                                data-pegawaiId="<%= sk[i].pegawaiId %>"
+                                data-pegawaiId="<%= sk[i].pegawaiId.id %>"
                                 data-tanggal="<%= sk[i].tanggal %>"
-                                data-file_Sk="<%= sk[i].file_Sk %>"
+                                data-fileSk="<%= sk[i].file_Sk %>" data-toggle="modal" data-target="#edit_modal<%= sk[i].id %>"
                               ><i class="nav-icon fas fa-pencil-alt"></i> </a>
                               <button class="btn btn-danger" data-toggle="modal" data-target="#delete_modal<%= sk[i].id %>"><i class="nav-icon fas fa-trash"></i> </button>
                             
@@ -52,6 +52,46 @@
                                       <button type="submit" class="btn btn-danger">Hapus</button>
                                     </form>
                                     </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <!-- Modal edit -->
+                              <!-- Modal -->
+                              <div class="modal fade" id="edit_modal<%= sk[i].id %>" tabindex="-1" role="dialog" aria-labelledby="edit-modal" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="edit-modal">Ubah Data SK</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <form action="/admin/sk?_method=PUT" method="POST" enctype="multipart/form-data">
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label for="pegawaiId">Nama Pegawai <span class="text-danger">*</span></label>
+                                            <select name="pegawaiId" id="pegawaiId" class="form-control">
+                                              <option value="">-- Pilih Pegawai --</option>
+                                              <% for (let j = 0; j < pegawai.length; j++) { %> 
+                                              <option value="<%= pegawai[j].id %>" <%= pegawai[j].id == sk[i].pegawaiId.id ? 'selected' : null %> ><%= pegawai[j].nama %> </option>
+                                              <% } %>
+                                          </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="tanggal">Tanggal <span class="text-danger">*</span></label>
+                                            <input type="date" class="form-control" value="<%= sk[i].tanggal %>" name="tanggal" id="tanggal" >
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="file_Sk">File SK <span class="text-danger">*</span></label>
+                                            <input type="file" class="form-control" value="<%= sk[i].file_Sk %>" name="file_Sk">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <input type="hidden" value="<%= sk[i].id %>" name="id">
+                                      <button type="submit" class="btn btn-primary">Ubah</button>
+                                    </div>
+                                    </form>
                                   </div>
                                 </div>
                               </div>

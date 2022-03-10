@@ -12,7 +12,7 @@ const skSchema = new mongoose.Schema({
     },
     pegawaiId: {
         type: ObjectId,
-        ref: 'Jabatan'
+        ref: 'Pegawai'
     },
 })
 

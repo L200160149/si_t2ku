@@ -148,7 +148,6 @@ module.exports = {
                 no_bpjs_kes, 
                 no_bpjs_ket,
                 tanggal_masuk,
-                file_SK: `uploads/${req.files.file_SK[0].filename}`,
                 foto_ktp: `uploads/${req.files.foto_ktp[0].filename}`,
                 foto_npwp: `uploads/${req.files.foto_npwp[0].filename}`,
                 foto_rek_jateng: `uploads/${req.files.foto_rek_jateng[0].filename}`,
@@ -199,7 +198,6 @@ module.exports = {
                 pegawai.no_rek_bni = no_rek_bni;
                 pegawai.no_bpjs_kes = no_bpjs_kes;
                 pegawai.no_bpjs_ket = no_bpjs_ket;
-                pegawai.file_SK = `uploads/${req.files.file_SK[0].filename}`,
                 pegawai.foto_ktp = `uploads/${req.files.foto_ktp[0].filename}`,
                 pegawai.foto_npwp = `uploads/${req.files.foto_npwp[0].filename}`,
                 pegawai.foto_rek_jateng = `uploads/${req.files.foto_rek_jateng[0].filename}`,
@@ -221,13 +219,24 @@ module.exports = {
         try {
             const { id } = req.params;
             const pegawai = await Pegawai.findOne({_id: id});
-                // await fs.unlink(path.join(`public/${pegawai.file_SK}`));
-                // await fs.unlink(path.join(`public/${pegawai.foto_ktp}`));
-                // await fs.unlink(path.join(`public/${pegawai.foto_npwp}`));
-                // await fs.unlink(path.join(`public/${pegawai.foto_rek_jateng}`));
-                // await fs.unlink(path.join(`public/${pegawai.foto_rek_bni}`));
-                // await fs.unlink(path.join(`public/${pegawai.foto_bpjs_kes}`));
-                // await fs.unlink(path.join(`public/${pegawai.foto_bpjs_ket}`));
+            if (pegawai.foto_ktp) {
+                await fs.unlink(path.join(`public/${pegawai.foto_ktp}`));
+            }
+            if (pegawai.foto_npwp) {
+                await fs.unlink(path.join(`public/${pegawai.foto_npwp}`));
+            }
+            if (pegawai.foto_rek_jateng) {
+                await fs.unlink(path.join(`public/${pegawai.foto_rek_jateng}`));
+            }
+            if (pegawai.foto_rek_bni) {
+                await fs.unlink(path.join(`public/${pegawai.foto_rek_bni}`));
+            }
+            if (pegawai.foto_bpjs_kes) {
+                await fs.unlink(path.join(`public/${pegawai.foto_bpjs_kes}`));
+            }
+            if (pegawai.foto_bpjs_ket) {
+                await fs.unlink(path.join(`public/${pegawai.foto_bpjs_ket}`));
+            }
             await pegawai.remove();
             req.flash('alertMessage', 'Berhasil menghapus data Pegawai');
             req.flash('alertStatus', 'success');
@@ -469,13 +478,6 @@ module.exports = {
         try {
             const { id } = req.params;
             const pemasukan = await Pemasukan.findOne({_id: id});
-                // await fs.unlink(path.join(`public/${pemasukan.file_SK}`));
-                // await fs.unlink(path.join(`public/${pemasukan.foto_ktp}`));
-                // await fs.unlink(path.join(`public/${pemasukan.foto_npwp}`));
-                // await fs.unlink(path.join(`public/${pemasukan.foto_rek_jateng}`));
-                // await fs.unlink(path.join(`public/${pemasukan.foto_rek_bni}`));
-                // await fs.unlink(path.join(`public/${pemasukan.foto_bpjs_kes}`));
-                // await fs.unlink(path.join(`public/${pemasukan.foto_bpjs_ket}`));
             await pemasukan.remove();
             req.flash('alertMessage', 'Berhasil menghapus data Pemasukan');
             req.flash('alertStatus', 'success');
@@ -524,13 +526,6 @@ module.exports = {
         try {
             const { id } = req.params;
             const pengeluaran = await Pengeluaran.findOne({_id: id});
-                // await fs.unlink(path.join(`public/${pengeluaran.file_SK}`));
-                // await fs.unlink(path.join(`public/${pengeluaran.foto_ktp}`));
-                // await fs.unlink(path.join(`public/${pengeluaran.foto_npwp}`));
-                // await fs.unlink(path.join(`public/${pengeluaran.foto_rek_jateng}`));
-                // await fs.unlink(path.join(`public/${pengeluaran.foto_rek_bni}`));
-                // await fs.unlink(path.join(`public/${pengeluaran.foto_bpjs_kes}`));
-                // await fs.unlink(path.join(`public/${pengeluaran.foto_bpjs_ket}`));
             await pengeluaran.remove();
             req.flash('alertMessage', 'Berhasil menghapus data Pengeluaran');
             req.flash('alertStatus', 'success');
@@ -544,7 +539,8 @@ module.exports = {
 
     viewSk: async (req, res) => {
         try {
-            const sk = await Sk.find();
+            const sk = await Sk.find()
+                    .populate({ path: 'pegawaiId'})
             const pegawai = await Pegawai.find();
             // alert
             const alertMessage = req.flash('alertMessage');
@@ -572,7 +568,6 @@ module.exports = {
                 tanggal,
                 file_Sk: `uploads/${req.files.file_Sk[0].filename}`,
             });
-            console.log(file_Sk)
             req.flash('alertMessage', 'Berhasil menambahkan data SK');
             req.flash('alertStatus', 'success');
             res.redirect("/admin/sk");
@@ -584,11 +579,11 @@ module.exports = {
     },
     editSk: async (req, res) => {
         try {
-            const { id, pegawaiId, tanggal, file_Sk} = req.body;
+            const { id, pegawaiId, tanggal} = req.body;
             const sk = await Sk.findOne({_id: id});
                 sk.pegawaiId = pegawaiId;
                 sk.tanggal = tanggal;
-                sk.file_Sk = file_Sk;
+                sk.file_Sk = `uploads/${req.files.file_Sk[0].filename}`,
                 await sk.save();
                 req.flash('alertMessage', 'Berhasil mengubah data SK');
                 req.flash('alertStatus', 'success');
@@ -603,7 +598,9 @@ module.exports = {
         try {
             const { id } = req.params;
             const sk = await Sk.findOne({_id: id});
-                // await fs.unlink(path.join(`public/${pemasukan.file_SK}`));
+            if(sk.file_Sk) {
+                await fs.unlink(path.join(`public/${sk.file_Sk}`));
+            }
             await sk.remove();
             req.flash('alertMessage', 'Berhasil menghapus data SK');
             req.flash('alertStatus', 'success');

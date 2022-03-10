@@ -62,10 +62,6 @@ const pegawaiSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    file_SK: {
-        type: String,
-        required: true
-    },
     jabatanId: {
         type: ObjectId,
         ref: 'Jabatan'

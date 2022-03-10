@@ -62,7 +62,7 @@
                         <tr>
                           <td><%= i + 1 %></td>
                           <td><%= pemasukan[i].jumlah_iuran %></td>
-                          <td><%= pemasukan[i].tanggal.getDate()%> - <%= pemasukan[i].tanggal.getMonth()%> - <%= pemasukan[i].tanggal.getYear() %></td>
+                          <td><%= pemasukan[i].tanggal.getDate()%> - <%= pemasukan[i].tanggal.getMonth() + 1 %> - <%= pemasukan[i].tanggal.getFullYear() %></td>
                           <td><%= pemasukan[i].keterangan %></td>
                           <td>
                               <a href="javascript:void()" type="button" class="btn btn-info button-update"
@@ -124,7 +124,7 @@
                       <tr>
                         <td><%= i + 1 %></td>
                         <td><%= pengeluaran[i].jumlah_pengeluaran %></td>
-                        <td><%= pengeluaran[i].tanggal.getDate()%> - <%= pengeluaran[i].tanggal.getMonth()%> - <%= pengeluaran[i].tanggal.getYear() %></td>
+                        <td><%= pengeluaran[i].tanggal.getDate()%> - <%= pengeluaran[i].tanggal.getMonth() + 1 %> - <%= pengeluaran[i].tanggal.getFullYear() %></td>
                         <td><%= pengeluaran[i].keterangan %></td>
                         <td>
                             <a href="javascript:void()" type="button" class="btn btn-info button-update"
