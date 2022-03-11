@@ -3,20 +3,20 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="edit-modal">Ubah Data Pegawai</h5>
+          <h5 class="modal-title" id="edit-modal">Ubah Data Absensi</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form action="/admin/gaji?_method=PUT" method="POST" enctype="multipart/form-data">
+        <form action="/admin/absensi?_method=PUT" method="POST" enctype="multipart/form-data">
         <div class="modal-body">
             <div class="form-group">
                 <label for="tanggal">Tanggal <span class="text-danger">*</span></label>
                 <input type="date" class="form-control tanggal" name="tanggal" id="tanggal">
             </div>
             <div class="form-group">
-                <label for="slip_gaji">Slip Gaji <span class="text-danger">*</span></label>
-                <input type="file" class="form-control slip_gaji" name="slip_gaji" id="slip_gaji">
+                <label for="file_absensi">Absensi <span class="text-danger">*</span></label>
+                <input type="file" class="form-control file_absensi" name="file_absensi" id="file_absensi">
             </div>
         </div>
         <div class="modal-footer">

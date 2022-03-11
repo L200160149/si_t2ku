@@ -16,6 +16,7 @@ const Pemasukan = require("../models/Pemasukan");
 const Pengeluaran = require("../models/Pengeluaran");
 
 const {rupiah} = require("../middlewares/formatRupiah");
+const Absensi = require("../models/Absensi");
 
 module.exports = {
     // login
@@ -319,6 +320,8 @@ module.exports = {
         }
     },
     // akhir jabatan
+    
+    // gaji
     viewGaji: async (req, res) => {
         const gaji = await Gaji.find();
         const pegawai = await Pegawai.find()
@@ -424,6 +427,9 @@ module.exports = {
             console.log(error)
         }
     },
+    // akhir gaji
+
+    // pemasukan
     viewPemasukan: async (req, res) => {
         try {
             const pemasukan = await Pemasukan.find();
@@ -522,6 +528,9 @@ module.exports = {
             res.redirect("/admin/pemasukan");
         }
     },
+    // akhir pemasukan
+
+    // pengeluaran
     addPengeluaran: async (req, res) => {
         try {
             const { jumlah_pengeluaran, tanggal, keterangan} = req.body;
@@ -570,7 +579,9 @@ module.exports = {
             res.redirect("/admin/pemasukan");
         }
     },
+    // akhir pengeluaran
 
+    // sk
     viewSk: async (req, res) => {
         try {
             const sk = await Sk.find()
@@ -645,6 +656,78 @@ module.exports = {
             res.redirect("/admin/sk");
         }
     },
+    // akhir sk
+
+    // absensi
+    viewAbsensi: async (req, res) => {
+        const absensi = await Absensi.find();
+        // alert
+        const alertMessage = req.flash('alertMessage');
+        const alertStatus = req.flash('alertStatus');
+        const alert = {
+            message: alertMessage, 
+            status: alertStatus,
+        };
+        try {
+            res.render("admin/absensi/view_absensi", {
+                title: 'Data Absensi | T2KU BMCK Jateng',
+                alert,
+                absensi,
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    },
+    addAbsensi: async (req, res) => {
+        try {
+            const { tanggal } = req.body;
+            await Absensi.create({ 
+                tanggal,
+                file_absensi: `uploads/${req.files.file_absensi[0].filename}`,
+            });
+            req.flash('alertMessage', 'Berhasil menambahkan data Absensi');
+            req.flash('alertStatus', 'success');
+            res.redirect("/admin/absensi");
+        } catch (error) {
+            req.flash('alertMessage', `${error.message}`);
+            req.flash('alertStatus', 'danger');
+            res.redirect("/admin/absensi");
+        }
+    },
+    editAbsensi: async (req, res) => {
+        try {
+            const { id, tanggal} = req.body;
+            const absensi = await Absensi.findOne({_id: id});
+                absensi.tanggal = tanggal;
+                absensi.file_absensi = `uploads/${req.files.file_absensi[0].filename}`,
+                await absensi.save();
+                req.flash('alertMessage', 'Berhasil mengubah data Absensi');
+                req.flash('alertStatus', 'success');
+                res.redirect("/admin/absensi");
+        } catch (error) {
+            req.flash('alertMessage', `${error.message}`);
+            req.flash('alertStatus', 'danger');
+            res.redirect("/admin/absensi");
+        }
+    },
+    deleteAbsensi: async (req, res) => {
+        try {
+            const { id } = req.params;
+            const absensi = await Absensi.findOne({_id: id});
+            if(absensi.file_absensi) {
+                await fs.unlink(path.join(`public/${absensi.file_absensi}`));
+            }
+            await absensi.remove();
+            req.flash('alertMessage', 'Berhasil menghapus Absensi');
+            req.flash('alertStatus', 'success');
+            res.redirect("/admin/absensi");
+        } catch (error) {
+            req.flash('alertMessage', `${error.message}`);
+            req.flash('alertStatus', 'danger');
+            res.redirect("/admin/absensi");
+        }
+    },
+    // akhir absensi
 
     viewPengguna: async (req, res) => {
         try {

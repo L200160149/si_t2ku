@@ -35,6 +35,10 @@ var uploadGaji = upload.fields([
   { name: 'slip_gaji' },
 ])
 
+var uploadAbsensi = upload.fields([
+  { name: 'file_absensi' },
+])
+
 // semua router dibawah auth harus login terlebih dahulu
 // router.use(auth);
 
@@ -72,6 +76,11 @@ router.get('/sk', adminController.viewSk);
 router.post('/sk', uploadSk, adminController.addSk);
 router.put('/sk', uploadSk, adminController.editSk);
 router.delete('/sk/:id', adminController.deleteSk);
+// route absensi
+router.get('/absensi', adminController.viewAbsensi);
+router.post('/absensi', uploadAbsensi, adminController.addAbsensi);
+router.put('/absensi', uploadAbsensi, adminController.editAbsensi);
+router.delete('/absensi/:id', adminController.deleteAbsensi);
 // route pengguna
 router.get('/pengguna', adminController.viewPengguna);
 router.post('/pengguna', adminController.addPengguna);
