@@ -43,6 +43,10 @@ var uploadSuratMasuk = upload.fields([
   { name: 'surat_masuk'}
 ])
 
+var uploadSuratKeluar = upload.fields([
+  { name: 'surat_keluar'}
+])
+
 // semua router dibawah auth harus login terlebih dahulu
 // router.use(auth);
 
@@ -90,6 +94,10 @@ router.get('/surat', adminController.viewSuratMasuk);
 router.post('/surat', uploadSuratMasuk, adminController.addSuratMasuk);
 router.put('/surat', uploadSuratMasuk, adminController.editSuratMasuk);
 router.delete('/surat/:id', adminController.deleteSuratMasuk);
+// route suratkeluar
+router.post('/suratkeluar', uploadSuratKeluar, adminController.addSuratKeluar);
+router.put('/surat', uploadSuratKeluar, adminController.editSuratKeluar);
+router.delete('/surat/:id', adminController.deleteSuratKeluar);
 // route pengguna
 router.get('/pengguna', adminController.viewPengguna);
 router.post('/pengguna', adminController.addPengguna);
