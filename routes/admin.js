@@ -39,6 +39,10 @@ var uploadAbsensi = upload.fields([
   { name: 'file_absensi' },
 ])
 
+var uploadSuratMasuk = upload.fields([
+  { name: 'surat_masuk'}
+])
+
 // semua router dibawah auth harus login terlebih dahulu
 // router.use(auth);
 
@@ -81,6 +85,11 @@ router.get('/absensi', adminController.viewAbsensi);
 router.post('/absensi', uploadAbsensi, adminController.addAbsensi);
 router.put('/absensi', uploadAbsensi, adminController.editAbsensi);
 router.delete('/absensi/:id', adminController.deleteAbsensi);
+// route suratmasuk
+router.get('/surat', adminController.viewSuratMasuk);
+router.post('/surat', uploadSuratMasuk, adminController.addSuratMasuk);
+router.put('/surat', uploadSuratMasuk, adminController.editSuratMasuk);
+router.delete('/surat/:id', adminController.deleteSuratMasuk);
 // route pengguna
 router.get('/pengguna', adminController.viewPengguna);
 router.post('/pengguna', adminController.addPengguna);

@@ -17,6 +17,7 @@ const Pengeluaran = require("../models/Pengeluaran");
 
 const {rupiah} = require("../middlewares/formatRupiah");
 const Absensi = require("../models/Absensi");
+const Suratmasuk = require("../models/Suratmasuk");
 
 module.exports = {
     // login
@@ -728,6 +729,81 @@ module.exports = {
         }
     },
     // akhir absensi
+
+    // suratmasuk
+    viewSuratMasuk: async (req, res) => {
+        const suratmasuk = await Suratmasuk.find();
+        // alert
+        const alertMessage = req.flash('alertMessage');
+        const alertStatus = req.flash('alertStatus');
+        const alert = {
+            message: alertMessage,
+            status: alertStatus
+        }
+        try {
+            res.render('admin/suratmasuk/view_suratmasuk', {
+                title: 'Data Absensi | T2KU BMCK Jateng',
+                suratmasuk,
+                alert
+            })
+        } catch (error) {
+            req.flash('alertMessage', `${error.message}`);
+            req.flash('alertStatus', 'danger');
+            res.redirect("/admin/surat");
+        }
+    },
+    addSuratMasuk: async (req, res) => {
+        try {
+            const {tanggal, judul} = req.body;
+            await Suratmasuk.create({
+                tanggal,
+                judul,
+                surat_masuk : `uploads/${req.files.surat_masuk[0].filename}`
+            })
+            req.flash('alertMessage', 'Berhasil menambah data Surat Masuk');
+            req.flash('alertStatus', 'success')
+            res.redirect('/admin/surat')
+        } catch (error) {
+            req.flash('alertMessage', `${error.message}`);
+            req.flash('alertStatus', 'danger');
+            res.redirect("/admin/surat");
+        }
+    },
+    editSuratMasuk: async (req, res) => {
+        try {
+            const { id, tanggal, judul } = req.body;
+            const suratmasuk = await Suratmasuk.findOne({_id: id});
+                suratmasuk.tanggal = tanggal;
+                suratmasuk.judul = judul;
+                suratmasuk.surat_masuk = `uploads/${req.files.surat_masuk[0].filename}`;
+                suratmasuk.save();
+            req.flash('alertMessage', 'Berhasil mengubah data Surat Masuk');
+            req.flash('alertStatus', 'success')
+            res.redirect('/admin/surat')
+        } catch (error) {
+            req.flash('alertMessage', `${error.message}`);
+            req.flash('alertStatus', 'danger');
+            res.redirect("/admin/surat");
+        }
+    },
+    deleteSuratMasuk: async (req, res) => {
+        try {
+            const { id } = req.params;
+            const suratmasuk = await Suratmasuk.findOne({_id: id});
+            if (suratmasuk.surat_masuk) {
+                await fs.unlink(path.join(`${suratmasuk.surat_masuk}`))
+            }
+            await suratmasuk.remove();
+            req.flash('alertMessage', 'Data Surat masuk berhasil dihapus');
+            req.flash('alertStatus', 'success')
+            res.redirect('/admin/surat')
+        } catch (error) {
+            req.flash('alertMessage', `${error.message}`);
+            req.flash('alertStatus', 'danger');
+            res.redirect("/admin/surat");
+        }
+    },
+    // akhir suratmasuk
 
     viewPengguna: async (req, res) => {
         try {

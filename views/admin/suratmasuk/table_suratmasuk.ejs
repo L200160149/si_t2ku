@@ -2,41 +2,45 @@
 <div class="content">
     <div class="container-fluid">
       <div class="row">
-          <div class="col-md-8">
+          <div class="col-md-6">
               <div class="card card-primary card-outline">
                 <div class="card-header">
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#add-modal"><i class="nav-icon fas fa-plus"></i> &nbsp;Tambah Absensi</button>
+                    <h5 class="m-0">Tabel Surat Masuk</h5>
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered table-striped" id="dataTable2">
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#add-modal"><i class="nav-icon fas fa-plus"></i> &nbsp;Tambah</button>
                         <thead>
                           <tr>
                             <th>No.</th>
-                            <th>Bulan - Tahun</th>
-                            <th>File Absensi</th>
+                            <th>Judul</th>
+                            <th>Tanggal</th>
+                            <th>File</th>
                             <th>Aksi</th>
                           </tr>
                         </thead>
                         <tbody>
-                        <% for (let i = 0; i < absensi.length; i++) { %> 
+                        <% for (let i = 0; i < suratmasuk.length; i++) { %> 
                         <tr>
                           <td><%= i + 1 %></td>
-                          <td><%= absensi[i].tanggal.getMonth() + 1 %> - <%= absensi[i].tanggal.getFullYear() %></td>
-                          <td><img width="150" src="http://localhost:3000/public/<%= absensi[i].file_absensi %>" alt=""></td>
+                          <td><%= suratmasuk[i].judul %></td>
+                          <td><%= suratmasuk[i].tanggal.getDate() %> - <%= suratmasuk[i].tanggal.getMonth() + 1 %> - <%= suratmasuk[i].tanggal.getFullYear() %></td>
+                          <td><img width="150" src="http://localhost:3000/public/<%= suratmasuk[i].surat_masuk %>" alt=""></td>
                           <td>
                             <a href="javascript:void()" type="button" class="btn btn-info button-update m-1"
-                                data-id="<%= absensi[i].id %>"
-                                data-tanggal="<%= absensi[i].tanggal %>"
-                                data-unker="<%= absensi[i].file_absensi %>"
+                                data-id="<%= suratmasuk[i].id %>"
+                                data-judul="<%= suratmasuk[i].judul %>"
+                                data-tanggal="<%= suratmasuk[i].tanggal %>"
+                                data-unker="<%= suratmasuk[i].surat_masuk %>"
                               ><i class="nav-icon fas fa-pencil-alt"></i> </a>
-                              <button class="btn btn-danger m-1" data-toggle="modal" data-target="#delete_modal<%= absensi[i].id %>"><i class="nav-icon fas fa-trash"></i> </button>
+                              <button class="btn btn-danger m-1" data-toggle="modal" data-target="#delete_modal<%= suratmasuk[i].id %>"><i class="nav-icon fas fa-trash"></i> </button>
                             
                               <!-- Modal Hapus -->
-                              <div class="modal fade" id="delete_modal<%= absensi[i].id %>" tabindex="-1" role="dialog" aria-labelledby="delete_modalTitle" aria-hidden="true">
+                              <div class="modal fade" id="delete_modal<%= suratmasuk[i].id %>" tabindex="-1" role="dialog" aria-labelledby="delete_modalTitle" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                   <div class="modal-content">
                                     <div class="modal-header">
-                                      <h5 class="modal-title" id="delete_modalTitle">Hapus Data Absensi ?</h5>
+                                      <h5 class="modal-title" id="delete_modalTitle">Hapus Data Surat Masuk ?</h5>
                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                       </button>
@@ -45,7 +49,7 @@
                                       Data yang sudah di hapus tidak dapat dikembalikan lagi.
                                     </div>
                                     <div class="modal-footer">
-                                    <form action="/admin/absensi/<%= absensi[i].id %>?_method=DELETE" method="POST">
+                                    <form action="/admin/surat/<%= suratmasuk[i].id %>?_method=DELETE" method="POST">
                                       <button type="submit" class="btn btn-danger">Hapus</button>
                                     </form>
                                     </div>
