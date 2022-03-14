@@ -15,4 +15,4 @@ const suratMasukSchema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('suratMasuk', suratMasukSchema)
+module.exports = mongoose.model('Suratmasuk', suratMasukSchema)

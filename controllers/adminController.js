@@ -170,10 +170,9 @@ module.exports = {
     },
     editPegawai: async (req, res) => {
         try {
-            const { id, jabatanId, nama, unker, nik, npwp, no_rek_jateng, no_rek_bni, no_bpjs_kes, no_bpjs_ket} = req.body;
+            const { id, nama, unker, nik, npwp, no_rek_jateng, no_rek_bni, no_bpjs_kes, no_bpjs_ket} = req.body;
             const pegawai = await Pegawai.findOne({_id: id});
-            if (req.files == undefined) {
-                pegawai.jabatanId = jabatanId;
+            
                 pegawai.nama = nama;
                 pegawai.unker = unker;
                 pegawai.nik = nik;
@@ -182,37 +181,29 @@ module.exports = {
                 pegawai.no_rek_bni = no_rek_bni;
                 pegawai.no_bpjs_kes = no_bpjs_kes;
                 pegawai.no_bpjs_ket = no_bpjs_ket;
+                if (req.files.foto_ktp) {
+                    pegawai.foto_ktp = `uploads/${req.files.foto_ktp[0].filename}`
+                }
+                if (req.files.foto_npwp) {
+                    pegawai.foto_npwp = `uploads/${req.files.foto_npwp[0].filename}`
+                }
+                if (req.files.foto_rek_jateng) {
+                    pegawai.foto_rek_jateng = `uploads/${req.files.foto_rek_jateng[0].filename}`
+                }
+                if (req.files.foto_rek_bni) {
+                    pegawai.foto_rek_bni = `uploads/${req.files.foto_rek_bni[0].filename}`
+                }
+                if (req.files.foto_bpjs_kes) {
+                    pegawai.foto_bpjs_kes = `uploads/${req.files.foto_bpjs_kes[0].filename}`
+                }
+                if (req.files.foto_bpjs_ket) {
+                    pegawai.foto_bpjs_ket = `uploads/${req.files.foto_bpjs_ket[0].filename}`
+                }
                 await pegawai.save();
                 req.flash('alertMessage', 'Berhasil mengubah data Pegawai');
                 req.flash('alertStatus', 'success');
                 res.redirect("/admin/pegawai");
-            } else {
-                // await fs.unlink(path.join(`public/${pegawai.file_SK}`));
-                // await fs.unlink(path.join(`public/${pegawai.foto_ktp}`));
-                // await fs.unlink(path.join(`public/${pegawai.foto_npwp}`));
-                // await fs.unlink(path.join(`public/${pegawai.foto_rek_jateng}`));
-                // await fs.unlink(path.join(`public/${pegawai.foto_rek_bni}`));
-                // await fs.unlink(path.join(`public/${pegawai.foto_bpjs_kes}`));
-                // await fs.unlink(path.join(`public/${pegawai.foto_bpjs_ket}`));
-                pegawai.nama = nama;
-                pegawai.unker = unker;
-                pegawai.nik = nik;
-                pegawai.npwp = npwp;
-                pegawai.no_rek_jateng = no_rek_jateng;
-                pegawai.no_rek_bni = no_rek_bni;
-                pegawai.no_bpjs_kes = no_bpjs_kes;
-                pegawai.no_bpjs_ket = no_bpjs_ket;
-                pegawai.foto_ktp = `uploads/${req.files.foto_ktp[0].filename}`,
-                pegawai.foto_npwp = `uploads/${req.files.foto_npwp[0].filename}`,
-                pegawai.foto_rek_jateng = `uploads/${req.files.foto_rek_jateng[0].filename}`,
-                pegawai.foto_rek_bni = `uploads/${req.files.foto_rek_bni[0].filename}`,
-                pegawai.foto_bpjs_kes = `uploads/${req.files.foto_bpjs_kes[0].filename}`,
-                pegawai.foto_bpjs_ket = `uploads/${req.files.foto_bpjs_ket[0].filename}`
-                await pegawai.save();
-                req.flash('alertMessage', 'Berhasil mengubah data Pegawai');
-                req.flash('alertStatus', 'success');
-                res.redirect("/admin/pegawai");
-            }
+
         } catch (error) {
             req.flash('alertMessage', `${error.message}`);
             req.flash('alertStatus', 'danger');
@@ -368,8 +359,12 @@ module.exports = {
         try {
             const { id, tanggal} = req.body;
             const slipGaji = await Slipgaji.findOne({_id: id});
-                slipGaji.tanggal = tanggal;
-                slipGaji.slip_gaji = `uploads/${req.files.slip_gaji[0].filename}`,
+                if(tanggal) {
+                    slipGaji.tanggal = tanggal;
+                }
+                if (req.files.slip_gaji) {
+                    slipGaji.slip_gaji = `uploads/${req.files.slip_gaji[0].filename}`
+                }
                 await slipGaji.save();
                 req.flash('alertMessage', 'Berhasil mengubah data Slip Gaji');
                 req.flash('alertStatus', 'success');
@@ -629,8 +624,12 @@ module.exports = {
             const { id, pegawaiId, tanggal} = req.body;
             const sk = await Sk.findOne({_id: id});
                 sk.pegawaiId = pegawaiId;
-                sk.tanggal = tanggal;
-                sk.file_Sk = `uploads/${req.files.file_Sk[0].filename}`,
+                if(tanggal) {
+                    sk.tanggal = tanggal;
+                }
+                if (req.files.file_Sk) {
+                    sk.file_Sk = `uploads/${req.files.file_Sk[0].filename}`
+                }
                 await sk.save();
                 req.flash('alertMessage', 'Berhasil mengubah data SK');
                 req.flash('alertStatus', 'success');
@@ -700,8 +699,12 @@ module.exports = {
         try {
             const { id, tanggal} = req.body;
             const absensi = await Absensi.findOne({_id: id});
-                absensi.tanggal = tanggal;
-                absensi.file_absensi = `uploads/${req.files.file_absensi[0].filename}`,
+                if (tanggal) {
+                    absensi.tanggal = tanggal;
+                }
+                if (req.files.file_absensi) {
+                    absensi.file_absensi = `uploads/${req.files.file_absensi[0].filename}`
+                }
                 await absensi.save();
                 req.flash('alertMessage', 'Berhasil mengubah data Absensi');
                 req.flash('alertStatus', 'success');
@@ -831,10 +834,14 @@ module.exports = {
             const { id, judul, tanggal } = req.body;
             const suratkeluar = await Suratkeluar.findOne({_id: id})
                 suratkeluar.judul = judul;
-                suratkeluar.tanggal = tanggal;
-                suratkeluar.surat_keluar = `uploads/${req.files.surat_keluar[0].filename}`;
+                if(tanggal) {
+                    suratkeluar.tanggal = tanggal;
+                }
+                if(req.files.surat_keluar) {
+                    suratkeluar.surat_keluar = `uploads/${req.files.surat_keluar[0].filename}`;
+                }
                 suratkeluar.save();
-            req.flash('alertMessage', 'Berhasil menambah data Surat Keluar')
+            req.flash('alertMessage', 'Berhasil mengubah data Surat Keluar')
             req.flash('alertStatus', 'success')
             res.redirect('/admin/surat')
         } catch (error) {
