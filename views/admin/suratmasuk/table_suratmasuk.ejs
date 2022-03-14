@@ -25,7 +25,7 @@
                           <td><%= i + 1 %></td>
                           <td><%= suratmasuk[i].judul %></td>
                           <td><%= suratmasuk[i].tanggal.getDate() %> - <%= suratmasuk[i].tanggal.getMonth() + 1 %> - <%= suratmasuk[i].tanggal.getFullYear() %></td>
-                          <td><img width="150" src="http://localhost:3000/public/<%= suratmasuk[i].surat_masuk %>" alt=""></td>
+                          <td><img width="150" src="https://t2ku-bmck.herokuapp.com/public/<%= suratmasuk[i].surat_masuk %>" alt=""></td>
                           <td>
                             <a href="javascript:void()" type="button" class="btn btn-info button-update m-1"
                                 data-id="<%= suratmasuk[i].id %>"
@@ -87,7 +87,7 @@
                           <td><%= i + 1 %></td>
                           <td><%= suratkeluar[i].judul %></td>
                           <td><%= suratkeluar[i].tanggal.getDate() %> - <%= suratkeluar[i].tanggal.getMonth() + 1 %> - <%= suratkeluar[i].tanggal.getFullYear() %></td>
-                          <td><img width="150" src="http://localhost:3000/public/<%= suratkeluar[i].surat_keluar %>" alt=""></td>
+                          <td><img width="150" src="https://t2ku-bmck.herokuapp.com/public/<%= suratkeluar[i].surat_keluar %>" alt=""></td>
                           <td>
                             <a href="javascript:void()" type="button" class="btn btn-info button-update m-1"
                                 data-id="<%= suratkeluar[i].id %>"

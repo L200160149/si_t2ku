@@ -48,7 +48,7 @@ var uploadSuratKeluar = upload.fields([
 ])
 
 // semua router dibawah auth harus login terlebih dahulu
-// router.use(auth);
+router.use(auth);
 
 router.get('/logout', adminController.authLogout);
 // route dashboard
