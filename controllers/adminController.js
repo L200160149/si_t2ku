@@ -2,7 +2,7 @@ const Pegawai = require("../models/Pegawai")
 const Gaji = require("../models/Gaji")
 const Jabatan = require("../models/Jabatan");
 const Users = require("../models/Users");
-const Sk = require("../models/SK");
+const Sk = require("../models/Sk");
 const Slipgaji = require("../models/Slipgaji");
 
 let pdf = require("html-pdf");
