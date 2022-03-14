@@ -96,8 +96,8 @@ router.put('/surat', uploadSuratMasuk, adminController.editSuratMasuk);
 router.delete('/surat/:id', adminController.deleteSuratMasuk);
 // route suratkeluar
 router.post('/suratkeluar', uploadSuratKeluar, adminController.addSuratKeluar);
-router.put('/surat', uploadSuratKeluar, adminController.editSuratKeluar);
-router.delete('/surat/:id', adminController.deleteSuratKeluar);
+router.put('/suratkeluar', uploadSuratKeluar, adminController.editSuratKeluar);
+router.delete('/suratkeluar/:id', adminController.deleteSuratKeluar);
 // route pengguna
 router.get('/pengguna', adminController.viewPengguna);
 router.post('/pengguna', adminController.addPengguna);

@@ -57,14 +57,14 @@
 
     $('#dataTable1').on('click', '.button-update', function() {
       let id = $(this).data('id');
-      let tanggalsuratkeluar = $(this).data('tanggalsuratkeluar');
-      let judulsuratkeluar = $(this).data('judulsuratkeluar');
+      let tanggal = $(this).data('tanggal');
+      let judul = $(this).data('judul');
       let surat_masuk = $(this).data('surat_masuk');
 
       $('#edit-suratkeluar-modal').modal('show');
       $('.id').val(id);
-      $('.tanggalsuratkeluar').val(tanggalsuratkeluar);
-      $('.judulsuratkeluar').val(judulsuratkeluar);
+      $('.tanggal').val(tanggal);
+      $('.judul').val(judul);
       $('.surat_masuk').val(surat_masuk);
     })
   </script>

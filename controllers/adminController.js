@@ -835,7 +835,7 @@ module.exports = {
                 suratkeluar.surat_keluar = `uploads/${req.files.surat_keluar[0].filename}`;
                 suratkeluar.save();
             req.flash('alertMessage', 'Berhasil menambah data Surat Keluar')
-            req.flash('alertstatus', 'success')
+            req.flash('alertStatus', 'success')
             res.redirect('/admin/surat')
         } catch (error) {
             req.flash('alertMessage', `${error.message}`);

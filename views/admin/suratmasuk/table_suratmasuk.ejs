@@ -87,12 +87,12 @@
                           <td><%= i + 1 %></td>
                           <td><%= suratkeluar[i].judul %></td>
                           <td><%= suratkeluar[i].tanggal.getDate() %> - <%= suratkeluar[i].tanggal.getMonth() + 1 %> - <%= suratkeluar[i].tanggal.getFullYear() %></td>
-                          <td><img width="150" src="http://localhost:3000/public/<%= suratkeluar[i].surat_masuk %>" alt=""></td>
+                          <td><img width="150" src="http://localhost:3000/public/<%= suratkeluar[i].surat_keluar %>" alt=""></td>
                           <td>
                             <a href="javascript:void()" type="button" class="btn btn-info button-update m-1"
                                 data-id="<%= suratkeluar[i].id %>"
-                                data-judulsuratkeluar="<%= suratkeluar[i].judul %>"
-                                data-tanggalsuratkeluar="<%= suratkeluar[i].tanggal %>"
+                                data-judul="<%= suratkeluar[i].judul %>"
+                                data-tanggal="<%= suratkeluar[i].tanggal %>"
                                 data-surat_keluar="<%= suratkeluar[i].surat_masuk %>"
                               ><i class="nav-icon fas fa-pencil-alt"></i> </a>
                               <button class="btn btn-danger m-1" data-toggle="modal" data-target="#delete_modal<%= suratkeluar[i].id %>"><i class="nav-icon fas fa-trash"></i> </button>
@@ -111,7 +111,7 @@
                                       Data yang sudah di hapus tidak dapat dikembalikan lagi.
                                     </div>
                                     <div class="modal-footer">
-                                    <form action="/admin/surat/<%= suratkeluar[i].id %>?_method=DELETE" method="POST">
+                                    <form action="/admin/suratkeluar/<%= suratkeluar[i].id %>?_method=DELETE" method="POST">
                                       <button type="submit" class="btn btn-danger">Hapus</button>
                                     </form>
                                     </div>
