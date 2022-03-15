@@ -4,21 +4,20 @@ const Jabatan = require("../models/Jabatan");
 const Users = require("../models/Users");
 const Sk = require("../models/Sk");
 const Slipgaji = require("../models/Slipgaji");
+const Absensi = require("../models/Absensi");
+const Suratmasuk = require("../models/Suratmasuk");
+const Suratkeluar = require("../models/Suratkeluar");
 
-let pdf = require("html-pdf");
-let ejs = require("ejs");
 const fs = require('fs-extra');
 const path = require('path');
 const bcrypt = require('bcryptjs');
+const excelJS = require('exceljs');
 
 const { check  } = require('express-validator');
 const Pemasukan = require("../models/Pemasukan");
 const Pengeluaran = require("../models/Pengeluaran");
 
 const {rupiah} = require("../middlewares/formatRupiah");
-const Absensi = require("../models/Absensi");
-const Suratmasuk = require("../models/Suratmasuk");
-const Suratkeluar = require("../models/Suratkeluar");
 
 module.exports = {
     // login
@@ -390,38 +389,6 @@ module.exports = {
             req.flash('alertMessage', `${error.message}`);
             req.flash('alertStatus', 'danger');
             res.redirect("/admin/gaji");
-        }
-    },
-    cetakGaji: async (req, res) => {
-        try {
-            const { id } = req.body;
-            const pegawai = await Pegawai.findOne({_id: id})
-            .populate({ path: 'jabatanId'})
-            ejs.renderFile(path.join('./views/', "report.ejs"), {pegawai}, (err, data) => {
-                if (err) {
-                      res.send(err);
-                } else {
-                    let options = {
-                        "height": "11.25in",
-                        "width": "8.5in",
-                        "header": {
-                            "height": "20mm"
-                        },
-                        "footer": {
-                            "height": "20mm",
-                        },
-                    };
-                    pdf.create(data, options).toFile("report.pdf", function (err, data) {
-                        if (err) {
-                            res.send(err);
-                        } else {
-                            res.send("File created successfully");
-                        }
-                    });
-                }
-            });
-        } catch (error) {
-            console.log(error)
         }
     },
     // akhir gaji
@@ -938,4 +905,63 @@ module.exports = {
             res.redirect("/admin/pengguna");
         }
     },
+
+    // export excel
+    exportExcel: async (req, res) => {
+        const workbook = new excelJS.Workbook();  // Create a new workbook
+        const worksheet = workbook.addWorksheet("Pegawai T2Ku"); // New Worksheet
+        const path = "./public/excel";  // Path to download excel
+        const dateName = Date.now();
+
+        // Column for data in excel. key must match data key
+        worksheet.columns = [
+            { header: "No", key: "no", width: 10 }, 
+            { header: "Nama", key: "nama", width: 10 },
+            { header: "Unit Kerja", key: "unker", width: 10 },
+            { header: "NIK", key: "nik", width: 10 },
+            { header: "NPWP", key: "npwp", width: 10 },
+            { header: "Nomor Rekening Bank Jateng", key: "no_rek_jateng", width: 10 },
+            { header: "Nomor Rekening Bank BNI", key: "no_rek_bni", width: 10 },
+            { header: "Nomor BPJS Kesehatan", key: "no_bpjs_kes", width: 10 },
+            { header: "Nomor BPJS Ketenagakerjaan", key: "no_bpjs_ket", width: 10 },
+            { header: "Tanggal Masuk", key: "tanggal_masuk", width: 10 },
+            { header: "Foto KTP", key: "foto_ktp", width: 10 },
+            { header: "Foto NPWP", key: "foto_npwp", width: 10 },
+            { header: "Foto Rekening Bank Jateng", key: "foto_rek_jateng", width: 10 },
+            { header: "Foto Rekening Bank BNI", key: "foto_rek_bni", width: 10 },
+            { header: "Foto BPJS Kesehatan", key: "foto_bpjs_kes", width: 10 },
+            { header: "Foto BPJS Ketenagakerjaan", key: "foto_bpjs_ket", width: 10 },
+        ];
+        const pegawai = await Pegawai.find();
+        
+        // Looping through Tes data
+        let counter = 1;
+        pegawai.forEach((user) => {
+        user.no = counter;
+        user.foto_ktp = `http://localhost:3000/public/${user.foto_ktp}`
+        user.foto_npwp = `http://localhost:3000/public/${user.foto_npwp}`
+        user.foto_rek_jateng = `http://localhost:3000/public/${user.foto_rek_jateng}`
+        user.foto_rek_bni = `http://localhost:3000/public/${user.foto_rek_bni}`
+        user.foto_bpjs_kes = `http://localhost:3000/public/${user.foto_bpjs_kes}`
+        user.foto_bpjs_ket = `http://localhost:3000/public/${user.foto_bpjs_ket}`
+        worksheet.addRow(user); // Add data in worksheet
+        counter++;
+        });
+        // Making first line in excel bold
+        worksheet.getRow(1).eachCell((cell) => {
+        cell.font = { bold: true };
+        });
+
+        try {
+            const data = await workbook.xlsx.writeFile(`${path}/Data-Pegawai-T2KU-${dateName}.xlsx`)
+             .then(() => {
+                res.redirect(`http://localhost:3000/${path}/Data-Pegawai-T2KU-${dateName}.xlsx`);
+             });
+          } catch (err) {
+              res.send({
+              status: "error",
+              message: err,
+            });
+            }
+    }
 }
