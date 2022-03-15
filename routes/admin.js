@@ -48,7 +48,7 @@ var uploadSuratKeluar = upload.fields([
 ])
 
 // semua router dibawah auth harus login terlebih dahulu
-router.use(auth);
+// router.use(auth);
 
 router.get('/logout', adminController.authLogout);
 // route dashboard
@@ -63,8 +63,6 @@ router.get('/jabatan', adminController.viewJabatan);
 router.post('/jabatan', adminController.addJabatan);
 router.put('/jabatan', adminController.editJabatan);
 router.delete('/jabatan/:id', adminController.deleteJabatan);
-// route cetakgaji
-router.get('/cetakgaji', adminController.cetakGaji);
 // route gaji
 router.get('/gaji', adminController.viewGaji);
 router.post('/gaji', uploadGaji, adminController.addSlipGaji);
