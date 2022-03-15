@@ -103,5 +103,6 @@ router.get('/pengguna', adminController.viewPengguna);
 router.post('/pengguna', adminController.addPengguna);
 router.put('/pengguna', adminController.editPengguna);
 router.delete('/pengguna/:id', adminController.deletePengguna);
-
+// download excel
+router.get("/downloadExcel", adminController.exportExcel);
 module.exports = router;
