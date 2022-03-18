@@ -964,8 +964,4 @@ module.exports = {
             });
             }
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 7951a89 (export excel)
